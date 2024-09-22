@@ -1,0 +1,3 @@
+Multi Entity
+License applies to an entity as well as parent, child, and sister entities. Contractors working on a project do not need a separate license.
+For more information, check the EULA and FAQ.
