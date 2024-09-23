@@ -303,7 +303,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -410,11 +410,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a38ac854a850c40a99e3f3e5a820dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 804567195}
   waterTilemap: {fileID: 986508572}
   baseTilemap: {fileID: 2023133586}
   decorationTilemap: {fileID: 462914911}
   waterTile: {fileID: 11400000, guid: d57567b7f036c824cba5c48caf486387, type: 2}
   landTile: {fileID: 11400000, guid: 026e41a4d56759a4b93e9a3933324211, type: 2}
+  decorationTiles:
+  - {fileID: 11400000, guid: d0081b722ac22a341b43369dd81674ed, type: 2}
+  - {fileID: 11400000, guid: 7621e243a92191e43b8520ce66f25e7e, type: 2}
+  - {fileID: 11400000, guid: f62ea96ca809f7e428cc4de5fda3e99c, type: 2}
+  - {fileID: 11400000, guid: ee2a8fe7b9d4a0e46b79968ccb266c11, type: 2}
+  - {fileID: 11400000, guid: 47d8b4ecc729c784586fa99abc53e6ad, type: 2}
+  - {fileID: 11400000, guid: 03be27e9db66993479ad49f7599247b9, type: 2}
+  - {fileID: 11400000, guid: 173a0225be131ef4fad10b2e76f6268d, type: 2}
+  - {fileID: 11400000, guid: 624871bfea100ad44b92a4bcdf332f32, type: 2}
 --- !u!4 &928276280
 Transform:
   m_ObjectHideFlags: 0
