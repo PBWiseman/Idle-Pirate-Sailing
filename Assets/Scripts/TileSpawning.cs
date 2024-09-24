@@ -17,12 +17,16 @@ public class TileSpawning : MonoBehaviour
     private Vector3Int bottomLeftCell;
     private Vector3Int topRightCell;
 
+    private List<int> coastLines;
+
+
     void Start()
     {
         getCorners();
-        fillWater();
-        spawnCoast();
-        spawnDecorations();
+        fillStartWater();
+        coastLines = new List<int> { topRightCell.x, topRightCell.x - 1 }; //Hardcoding a list of x lines to fill with coast
+        spawnStartCoast(coastLines);
+        spawnStartDecorations(coastLines);
     }
 
     private void Update()
@@ -30,7 +34,7 @@ public class TileSpawning : MonoBehaviour
         //Move the grid down 2 unit per second
         grid.transform.position -= new Vector3(0, 2 * Time.deltaTime, 0);
         despawnBottomRow();
-        spawnTopRow();
+        spawnTopRow(coastLines);
     }
 
     //Get the corners of the camera's view in world coordinates
@@ -52,7 +56,7 @@ public class TileSpawning : MonoBehaviour
     }
 
     //Fill the Tilemap with water tiles within the calculated bounds
-    private void fillWater()
+    private void fillStartWater()
     {
         //Fill the Tilemap with water tiles within the calculated bounds
         for (int x = bottomLeftCell.x; x <= topRightCell.x; x++)
@@ -66,25 +70,31 @@ public class TileSpawning : MonoBehaviour
         }
     }
 
-    //Spawn 2 layers of coast on the left and right of the screen
-    private void spawnCoast()
+    //Spawn layers of coast on the inputted x lines of the of the screen
+    private void spawnStartCoast(List<int> xLines)
     {
-        //Spawn coast on the left and right of the screen
-        for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
+        foreach (int x in xLines)
         {
-            baseTilemap.SetTile(new Vector3Int(bottomLeftCell.x, y, 0), landTile);
+            for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
+            {
+                baseTilemap.SetTile(new Vector3Int(x, y, 0), landTile);
+            }
         }
-        for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
+    }
+
+    //Spawn layers of decorations on the inputted x lines of the of the screen
+    private void spawnStartDecorations(List<int> xLines)
+    {
+        foreach (int x in xLines)
         {
-            baseTilemap.SetTile(new Vector3Int(topRightCell.x, y, 0), landTile);
-        }
-        for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
-        {
-            baseTilemap.SetTile(new Vector3Int(bottomLeftCell.x + 1, y, 0), landTile);
-        }
-        for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
-        {
-            baseTilemap.SetTile(new Vector3Int(topRightCell.x - 1, y, 0), landTile);
+            for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
+            {
+                if (Random.Range(0, 100) < 30)
+                {
+                    decorationTilemap.SetTile(new Vector3Int(x, y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
+                    decorationTilemap.SetTransformMatrix(new Vector3Int(x, y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
+                }
+            }
         }
     }
 
@@ -115,7 +125,8 @@ public class TileSpawning : MonoBehaviour
     }
 
     //Spawn the top row of tiles if they are going to be in view
-    private void spawnTopRow()
+    //Also spawn coast and decorations on the inputted x lines
+    private void spawnTopRow(List<int> xLines)
     {
         Camera mainCamera = Camera.main;
         if (mainCamera == null)
@@ -130,73 +141,21 @@ public class TileSpawning : MonoBehaviour
         // Check if the top row of tiles is going to be in view and spawn them
         if (topEdgeCell.y + 1 > topRightCell.y)
         {
+            topRightCell.y++;
             for (int x = bottomLeftCell.x; x <= topRightCell.x; x++)
             {
                 waterTilemap.SetTile(new Vector3Int(x, topRightCell.y, 0), waterTile);
                 waterTilemap.SetTransformMatrix(new Vector3Int(x, topRightCell.y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
             }
-            //Spawn coast on the left and right of the screen
-            baseTilemap.SetTile(new Vector3Int(bottomLeftCell.x, topRightCell.y, 0), landTile);
-            baseTilemap.SetTile(new Vector3Int(topRightCell.x, topRightCell.y, 0), landTile);
-            baseTilemap.SetTile(new Vector3Int(bottomLeftCell.x + 1, topRightCell.y, 0), landTile);
-            baseTilemap.SetTile(new Vector3Int(topRightCell.x - 1, topRightCell.y, 0), landTile);
-            topRightCell.y++;
-            if (Random.Range(0, 100) < 30)
+            foreach (int x in xLines)
             {
-                decorationTilemap.SetTile(new Vector3Int(bottomLeftCell.x, topRightCell.y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
-                decorationTilemap.SetTransformMatrix(new Vector3Int(bottomLeftCell.x, topRightCell.y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
-            }
-            if (Random.Range(0, 100) < 30)
-            {
-                decorationTilemap.SetTile(new Vector3Int(topRightCell.x, topRightCell.y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
-                decorationTilemap.SetTransformMatrix(new Vector3Int(topRightCell.x, topRightCell.y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
-            }
-            if (Random.Range(0, 100) < 30)
-            {
-                decorationTilemap.SetTile(new Vector3Int(bottomLeftCell.x + 1, topRightCell.y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
-                decorationTilemap.SetTransformMatrix(new Vector3Int(bottomLeftCell.x, topRightCell.y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
-            }
-            if (Random.Range(0, 100) < 30)
-            {
-                decorationTilemap.SetTile(new Vector3Int(topRightCell.x - 1, topRightCell.y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
-                decorationTilemap.SetTransformMatrix(new Vector3Int(topRightCell.x, topRightCell.y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
+                baseTilemap.SetTile(new Vector3Int(x, topRightCell.y, 0), landTile);
+                if (Random.Range(0, 100) < 30)
+                {
+                    decorationTilemap.SetTile(new Vector3Int(x, topRightCell.y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
+                }
             }
         }
     }
 
-    private void spawnDecorations()
-    {
-        for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
-        {
-            if (Random.Range(0, 100) < 30)
-            {
-                decorationTilemap.SetTile(new Vector3Int(bottomLeftCell.x + 1, y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
-                decorationTilemap.SetTransformMatrix(new Vector3Int(bottomLeftCell.x, y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
-            }
-        }
-        for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
-        {
-            if (Random.Range(0, 100) < 30)
-            {
-                decorationTilemap.SetTile(new Vector3Int(topRightCell.x - 1, y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
-                decorationTilemap.SetTransformMatrix(new Vector3Int(topRightCell.x, y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
-            }
-        }
-        for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
-        {
-            if (Random.Range(0, 100) < 30)
-            {
-                decorationTilemap.SetTile(new Vector3Int(bottomLeftCell.x + 1, y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
-                decorationTilemap.SetTransformMatrix(new Vector3Int(bottomLeftCell.x, y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
-            }
-        }
-        for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
-        {
-            if (Random.Range(0, 100) < 30)
-            {
-                decorationTilemap.SetTile(new Vector3Int(topRightCell.x - 1, y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
-                decorationTilemap.SetTransformMatrix(new Vector3Int(topRightCell.x, y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
-            }
-        }
-    }
 }
