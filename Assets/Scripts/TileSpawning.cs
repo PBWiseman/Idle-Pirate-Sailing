@@ -14,17 +14,31 @@ public class TileSpawning : MonoBehaviour
     public TileBase landTile;
     public TileBase[] decorationTiles;
 
-    private Vector3Int bottomLeftCell;
-    private Vector3Int topRightCell;
+    public Vector3Int bottomLeftCell;
+    public Vector3Int topRightCell;
+    public static TileSpawning Instance;
 
-    private List<int> coastLines;
+    public List<Vector3Int> coastLines;
+    private Camera mainCamera;
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        mainCamera = Camera.main;
+        getCorners();
+        coastLines = new List<Vector3Int> { topRightCell, topRightCell - new Vector3Int(1, 0, 0) }; //Hardcoding the rightmost two columns of the screen to be coast
+    }
 
     void Start()
     {
-        getCorners();
         fillStartWater();
-        coastLines = new List<int> { topRightCell.x, topRightCell.x - 1 }; //Hardcoding a list of x lines to fill with coast
         spawnStartCoast(coastLines);
         spawnStartDecorations(coastLines);
     }
@@ -71,28 +85,29 @@ public class TileSpawning : MonoBehaviour
     }
 
     //Spawn layers of coast on the inputted x lines of the of the screen
-    private void spawnStartCoast(List<int> xLines)
+    private void spawnStartCoast(List<Vector3Int> xLines)
     {
-        foreach (int x in xLines)
+        foreach (Vector3Int cell in xLines)
         {
             for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
             {
-                baseTilemap.SetTile(new Vector3Int(x, y, 0), landTile);
+                baseTilemap.SetTile(new Vector3Int(cell.x, y, 0), landTile);
             }
+            baseTilemap.SetTile(cell, landTile);
         }
     }
 
     //Spawn layers of decorations on the inputted x lines of the of the screen
-    private void spawnStartDecorations(List<int> xLines)
+    private void spawnStartDecorations(List<Vector3Int> xLines)
     {
-        foreach (int x in xLines)
+        foreach (Vector3Int cell in xLines)
         {
             for (int y = bottomLeftCell.y; y <= topRightCell.y; y++)
             {
                 if (Random.Range(0, 100) < 30)
                 {
-                    decorationTilemap.SetTile(new Vector3Int(x, y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
-                    decorationTilemap.SetTransformMatrix(new Vector3Int(x, y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
+                    decorationTilemap.SetTile(new Vector3Int(cell.x, y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
+                    decorationTilemap.SetTransformMatrix(new Vector3Int(cell.x, y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
                 }
             }
         }
@@ -101,7 +116,6 @@ public class TileSpawning : MonoBehaviour
     //Despawn the bottom row of tiles if they are out of view
     private void despawnBottomRow()
     {
-        Camera mainCamera = Camera.main;
         if (mainCamera == null)
         {
             return;
@@ -126,9 +140,8 @@ public class TileSpawning : MonoBehaviour
 
     //Spawn the top row of tiles if they are going to be in view
     //Also spawn coast and decorations on the inputted x lines
-    private void spawnTopRow(List<int> xLines)
+    private void spawnTopRow(List<Vector3Int> xLines)
     {
-        Camera mainCamera = Camera.main;
         if (mainCamera == null)
         {
             return;
@@ -147,12 +160,12 @@ public class TileSpawning : MonoBehaviour
                 waterTilemap.SetTile(new Vector3Int(x, topRightCell.y, 0), waterTile);
                 waterTilemap.SetTransformMatrix(new Vector3Int(x, topRightCell.y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
             }
-            foreach (int x in xLines)
+            foreach (Vector3Int cell in xLines)
             {
-                baseTilemap.SetTile(new Vector3Int(x, topRightCell.y, 0), landTile);
+                baseTilemap.SetTile(new Vector3Int(cell.x, topRightCell.y, 0), landTile);
                 if (Random.Range(0, 100) < 30)
                 {
-                    decorationTilemap.SetTile(new Vector3Int(x, topRightCell.y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
+                    decorationTilemap.SetTile(new Vector3Int(cell.x, topRightCell.y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
                 }
             }
         }
