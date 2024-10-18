@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 928276279}
   - component: {fileID: 928276281}
   m_Layer: 0
-  m_Name: TileSpawning
+  m_Name: SpawningManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,16 +513,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3703fdb36c899540bf1be98ce2e2ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debrisSprites:
-  - {fileID: 21300000, guid: 0413affeed1668241b15de67b4dbee83, type: 3}
-  - {fileID: 21300000, guid: 2badc22a46d77f045a2e4d9d7aa77de0, type: 3}
-  - {fileID: 21300000, guid: e61a60e45ea6ee6449cc793c8ceae0a7, type: 3}
-  - {fileID: 21300000, guid: f229840264cbf984e94fccc70f8fa3d0, type: 3}
-  - {fileID: 21300000, guid: 2075be04b955e4c49a32d4af989d53a8, type: 3}
-  - {fileID: 21300000, guid: c98ccad1fbd522447bfad5d51f0652ab, type: 3}
-  - {fileID: 21300000, guid: 56a20fea9883468409e6b73f888ff2c3, type: 3}
   debrisObjects: []
-  debrisPrefab: {fileID: 3687605944791927420, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
+  debrisPrefabs:
+  - debrisPrefab: {fileID: 145970284099866408, guid: 7bcf3b398b1cc7647b215600c6ae7d22, type: 3}
+    ChanceToSpawn: 5
+  - debrisPrefab: {fileID: 6775849398334090375, guid: 35c0d0e33dfa5a14d9e0be526b23e6c9, type: 3}
+    ChanceToSpawn: 4
+  - debrisPrefab: {fileID: 2320288020489355789, guid: 0ee4b722c8bf64f4ba14d9e8e0d662c5, type: 3}
+    ChanceToSpawn: 1
+  - debrisPrefab: {fileID: 4097267683594690970, guid: 38743ea50cedbe246a68ef1a8a2c7e24, type: 3}
+    ChanceToSpawn: 3
 --- !u!1 &986508569
 GameObject:
   m_ObjectHideFlags: 0
