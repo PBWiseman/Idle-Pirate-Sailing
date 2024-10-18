@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The type of loot that can be dropped
+/// Note: The values of the enum are the values of the loot type
+/// </summary>
 public enum LootType
 {
     Fabric,

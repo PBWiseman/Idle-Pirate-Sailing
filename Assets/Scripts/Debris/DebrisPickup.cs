@@ -10,6 +10,10 @@ public class DebrisPickup : MonoBehaviour
         if (collision.gameObject.tag == "Debris")
         {
             //Give the player loot
+            foreach (LootAmount loot in collision.gameObject.GetComponent<DebrisInfo>().loot.lootTable)
+            {
+                PlayerInventory.Instance.AddLoot(loot.lootType, loot.amount);
+            }
             DebrisSpawning.Instance.debrisObjects.Remove(collision.gameObject);
             Destroy(collision.gameObject);
         }
