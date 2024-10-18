@@ -13,7 +13,8 @@ public enum LootType
     Metal,
     Gold,
     Silver,
-    Copper
+    Copper,
+    IdleLoot
 }
 
 public class LootAmount

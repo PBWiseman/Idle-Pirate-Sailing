@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerInventory : MonoBehaviour
 {
     public List<LootAmount> inventory = new List<LootAmount>();
+
+    public int maxInventorySize = 50; //Starts at 50. Can be upgraded
+    public int maxIdleInventorySize = 50; //Starts at 50. Can be upgraded
 
     public static PlayerInventory Instance;
     void Awake()
@@ -18,9 +22,15 @@ public class PlayerInventory : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     public void AddLoot(LootType lootType, int amount)
     {
+        //Check if there is enough space in the player's inventory. If not, return
+        checkCapacity(lootType, ref amount);
+        if (amount == 0)
+        {
+            return;
+        }
         //Check if the player already has this type of loot
         foreach (LootAmount loot in inventory)
         {
@@ -84,7 +94,7 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Converts the player's copper coins to silver and silver coins to gold
     /// </summary>
-    public void ConvertCoins(lootType lootType)
+    private void ConvertCoins(LootType lootType)
     {
         if (lootType != LootType.Copper && lootType != LootType.Silver)
         {
@@ -128,5 +138,55 @@ public class PlayerInventory : MonoBehaviour
         SetLootAmount(LootType.Copper, copperOwned % 100);
 
         return true;
+    }
+
+    /// <summary>
+    /// Checks if there is enough space in the player's inventory for the specified amount of loot
+    /// </summary>
+    /// <param name="lootType">The type of loot to check</param>
+    /// <param name="amount">The amount of loot to check. Modified to the amount that will fit</param>
+    private void checkCapacity(LootType lootType, ref int amount)
+    {
+        //Coins don't take up inventory space
+        if (lootType == LootType.Copper || lootType == LootType.Silver || lootType == LootType.Gold)
+        {
+            return;
+        }
+
+        int spaceLeft = 0;
+        //Check if the loot is idle loot and set the space left accordingly
+        if (lootType == LootType.IdleLoot)
+        {
+            spaceLeft = maxIdleInventorySize - GetIdleInventorySize();
+        }
+        else
+        {
+            spaceLeft = maxInventorySize - GetInventorySize();
+        }
+        //If there is not enough space, set the amount to the space left
+        if (spaceLeft < amount)
+        {
+            amount = spaceLeft;
+        }
+    }
+
+    /// <summary>
+    /// Returns the amount of inventory space used
+    /// </summary>
+    private int GetInventorySize()
+    {
+        return inventory.Where(loot => loot.lootType != LootType.IdleLoot &&
+                                loot.lootType != LootType.Copper &&
+                                loot.lootType != LootType.Silver &&
+                                loot.lootType != LootType.Gold)
+                                .Sum(loot => loot.amount);
+    }
+
+    /// <summary>
+    /// Returns the amount of idle inventory space used
+    /// </summary>
+    private int GetIdleInventorySize()
+    {
+        return inventory.Where(loot => loot.lootType == LootType.IdleLoot).Sum(loot => loot.amount);
     }
 }
