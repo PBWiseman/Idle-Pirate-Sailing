@@ -516,13 +516,19 @@ MonoBehaviour:
   debrisObjects: []
   debrisPrefabs:
   - debrisPrefab: {fileID: 145970284099866408, guid: 7bcf3b398b1cc7647b215600c6ae7d22, type: 3}
-    ChanceToSpawn: 5
+    ChanceToSpawn: 7
   - debrisPrefab: {fileID: 6775849398334090375, guid: 35c0d0e33dfa5a14d9e0be526b23e6c9, type: 3}
-    ChanceToSpawn: 4
+    ChanceToSpawn: 5
   - debrisPrefab: {fileID: 2320288020489355789, guid: 0ee4b722c8bf64f4ba14d9e8e0d662c5, type: 3}
-    ChanceToSpawn: 1
+    ChanceToSpawn: 2
   - debrisPrefab: {fileID: 4097267683594690970, guid: 38743ea50cedbe246a68ef1a8a2c7e24, type: 3}
-    ChanceToSpawn: 3
+    ChanceToSpawn: 4
+  - debrisPrefab: {fileID: 1780852053506367306, guid: f053107dfb91d0d45b3ee55c09b35afd, type: 3}
+    ChanceToSpawn: 1
+  - debrisPrefab: {fileID: 2921206770694546671, guid: 8a062f5e0c74a5c489b40fe797b7279e, type: 3}
+    ChanceToSpawn: 15
+  - debrisPrefab: {fileID: 4804932829811195553, guid: 79d24786f9bdc104dab94e6dd13d7eb4, type: 3}
+    ChanceToSpawn: 13
 --- !u!1 &986508569
 GameObject:
   m_ObjectHideFlags: 0
