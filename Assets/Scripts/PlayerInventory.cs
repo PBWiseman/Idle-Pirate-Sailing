@@ -11,6 +11,7 @@ public class PlayerInventory : MonoBehaviour
     public int maxIdleInventorySize = 50; //Starts at 50. Can be upgraded
 
     public static PlayerInventory Instance;
+    
     void Awake()
     {
         if (Instance == null)
@@ -23,6 +24,11 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds the specified amount of loot to the player's inventory
+    /// </summary>
+    /// <param name="lootType">The type of loot to add</param>
+    /// <param name="amount">The amount of loot to add</param>
     public void AddLoot(LootType lootType, int amount)
     {
         //Check if there is enough space in the player's inventory. If not, return
@@ -38,14 +44,21 @@ public class PlayerInventory : MonoBehaviour
             {
                 loot.amount += amount;
                 ConvertCoins(lootType);
+                MainUI.Instance.updateDisplay(lootType, amount);
                 return;
             }
         }
         //If the player doesn't have this type of loot, add it to the inventory
         inventory.Add(new LootAmount { lootType = lootType, amount = amount });
         ConvertCoins(lootType);
+        MainUI.Instance.updateDisplay(lootType, amount);
     }
 
+    /// <summary>
+    /// Removes the specified amount of loot from the player's inventory
+    /// </summary>
+    /// <param name="lootType">The type of loot to remove</param>
+    /// <param name="amount">The amount of loot to remove</param>
     public void RemoveLoot(LootType lootType, int amount)
     {
         //Check if the player has this type of loot
@@ -63,6 +76,10 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the amount of loot of the specified type in the player's inventory
+    /// </summary>
+    /// <param name="lootType">The type of loot to get</param>
     public int GetLootAmount(LootType lootType)
     {
         foreach (LootAmount loot in inventory)
@@ -78,6 +95,8 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Sets the amount of loot of the specified type in the player's inventory. Mainly used for testing or coins after payment
     /// </summary>
+    /// <param name="lootType">The type of loot to set</param>
+    /// <param name="amount">The amount of loot to set</param>
     public void SetLootAmount(LootType lootType, int amount)
     {
         foreach (LootAmount loot in inventory)
@@ -94,6 +113,7 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Converts the player's copper coins to silver and silver coins to gold
     /// </summary>
+    /// <param name="lootType">Loot type. Will convert if it is a small coin</param>
     private void ConvertCoins(LootType lootType)
     {
         if (lootType != LootType.Copper && lootType != LootType.Silver)
@@ -157,11 +177,11 @@ public class PlayerInventory : MonoBehaviour
         //Check if the loot is idle loot and set the space left accordingly
         if (lootType == LootType.IdleLoot)
         {
-            spaceLeft = maxIdleInventorySize - GetIdleInventorySize();
+            spaceLeft = maxIdleInventorySize - GetIdleInventorySize;
         }
         else
         {
-            spaceLeft = maxInventorySize - GetInventorySize();
+            spaceLeft = maxInventorySize - GetInventorySize;
         }
         //If there is not enough space, set the amount to the space left
         if (spaceLeft < amount)
@@ -173,20 +193,24 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Returns the amount of inventory space used
     /// </summary>
-    private int GetInventorySize()
-    {
-        return inventory.Where(loot => loot.lootType != LootType.IdleLoot &&
+    private int GetInventorySize => inventory.Where(loot => loot.lootType != LootType.IdleLoot &&
                                 loot.lootType != LootType.Copper &&
                                 loot.lootType != LootType.Silver &&
                                 loot.lootType != LootType.Gold)
                                 .Sum(loot => loot.amount);
-    }
 
     /// <summary>
     /// Returns the amount of idle inventory space used
     /// </summary>
-    private int GetIdleInventorySize()
-    {
-        return inventory.Where(loot => loot.lootType == LootType.IdleLoot).Sum(loot => loot.amount);
-    }
+    private int GetIdleInventorySize => inventory.Where(loot => loot.lootType == LootType.IdleLoot).Sum(loot => loot.amount);
+
+    /// <summary>
+    /// Returns the amount of inventory space used as a string
+    /// </summary>
+    public string CapacityRegular => GetInventorySize + "/" + maxInventorySize;
+
+    /// <summary>
+    /// Returns the amount of idle inventory space used as a string
+    /// </summary>
+    public string CapacityIdle => GetIdleInventorySize + "/" + maxIdleInventorySize;
 }

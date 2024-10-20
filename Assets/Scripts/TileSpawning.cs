@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System;
+using Random = UnityEngine.Random;
 
 public class TileSpawning : MonoBehaviour
 {
@@ -31,6 +33,17 @@ public class TileSpawning : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        int refreshRate;
+        //Cap this at the lesser of the screen's refresh rate and 60fps
+        if (Screen.currentResolution.refreshRate < 0)
+        {
+            refreshRate = 60;
+        }
+        else
+        {
+            refreshRate = Math.Min(Screen.currentResolution.refreshRate, 60);
+        }
+        Application.targetFrameRate = refreshRate;
         mainCamera = Camera.main;
         getCorners();
         coastLines = new List<Vector3Int> { topRightCell, topRightCell - new Vector3Int(1, 0, 0) }; //Hardcoding the rightmost two columns of the screen to be coast

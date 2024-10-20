@@ -34,7 +34,7 @@ public class DebrisSpawning : MonoBehaviour
     void Update()
     {
         //If there are less than 10 debris objects and there isn't one in this row, have a 1 in 1000 chance of spawning one
-        if (debrisObjects.Count < 10 && !spawnedRows.Contains(TileSpawning.Instance.topRightCell.y + 1) && Random.Range(0, 1000) == 0)
+        if (debrisObjects.Count < 10 && !spawnedRows.Contains(TileSpawning.Instance.topRightCell.y + 1) && Random.Range(0, 100) == 0)
         {
             //Add each horizontal cell at the top of the baseTilemap, no matter the size of the grid, to the list of spawn locations
             List<Vector3Int> availableLocations = new List<Vector3Int>();
