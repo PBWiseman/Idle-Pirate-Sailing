@@ -535,6 +535,7 @@ MonoBehaviour:
   decorationTilemap: {fileID: 462914911}
   waterTile: {fileID: 11400000, guid: d57567b7f036c824cba5c48caf486387, type: 2}
   landTile: {fileID: 11400000, guid: 026e41a4d56759a4b93e9a3933324211, type: 2}
+  coastlineTile: {fileID: 11400000, guid: ab5ea63ba50da48459ba1a2435a38fea, type: 2}
   decorationTiles:
   - {fileID: 11400000, guid: d0081b722ac22a341b43369dd81674ed, type: 2}
   - {fileID: 11400000, guid: 7621e243a92191e43b8520ce66f25e7e, type: 2}
@@ -544,6 +545,72 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 03be27e9db66993479ad49f7599247b9, type: 2}
   - {fileID: 11400000, guid: 173a0225be131ef4fad10b2e76f6268d, type: 2}
   - {fileID: 11400000, guid: 624871bfea100ad44b92a4bcdf332f32, type: 2}
+  portTiles:
+    rows:
+    - tiles:
+      - {fileID: 11400000, guid: 6a286d8175715c64284c602a4add8dee, type: 2}
+      - {fileID: 11400000, guid: 90dcdf2f356617d40aa0c826b6f0de38, type: 2}
+      - {fileID: 11400000, guid: 90dcdf2f356617d40aa0c826b6f0de38, type: 2}
+    - tiles:
+      - {fileID: 11400000, guid: 381a90c73d4b2254c9751a0c52f1a2c9, type: 2}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 11400000, guid: 04cf295749f870844a4f12923708127b, type: 2}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 11400000, guid: 1db5b5f128f2ab642a8a20b5822fb8fa, type: 2}
+      - {fileID: 11400000, guid: dd6d6e7f4b61cb14e892b73caad7d69f, type: 2}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 0}
+      - {fileID: 11400000, guid: 1db5b5f128f2ab642a8a20b5822fb8fa, type: 2}
+      - {fileID: 11400000, guid: cbb0e02e020d64d4996d3ff8d76f361a, type: 2}
+    - tiles:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 0}
+      - {fileID: 11400000, guid: 6a286d8175715c64284c602a4add8dee, type: 2}
+      - {fileID: 11400000, guid: cbb0e02e020d64d4996d3ff8d76f361a, type: 2}
+    - tiles:
+      - {fileID: 11400000, guid: 6a286d8175715c64284c602a4add8dee, type: 2}
+      - {fileID: 11400000, guid: a35380da947ce5b41b85e8841e71e471, type: 2}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 11400000, guid: 644f507124951124aacf9733aa412852, type: 2}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 11400000, guid: 381a90c73d4b2254c9751a0c52f1a2c9, type: 2}
+      - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 11400000, guid: 1db5b5f128f2ab642a8a20b5822fb8fa, type: 2}
+      - {fileID: 11400000, guid: 90dcdf2f356617d40aa0c826b6f0de38, type: 2}
+      - {fileID: 11400000, guid: 90dcdf2f356617d40aa0c826b6f0de38, type: 2}
   bottomLeftCell: {x: 0, y: 0, z: 0}
   topRightCell: {x: 0, y: 0, z: 0}
   coastLines: []

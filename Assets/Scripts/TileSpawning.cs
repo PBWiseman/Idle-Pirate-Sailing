@@ -5,6 +5,20 @@ using UnityEngine.Tilemaps;
 using System;
 using Random = UnityEngine.Random;
 
+//A row of tiles
+[System.Serializable]
+public class TileRow
+{
+    public TileBase[] tiles;
+}
+
+//A set of rows. This is used to create a set 3d grid of tiles for the port or other fixed structures
+[System.Serializable]
+public class TileLayer
+{
+    public TileRow[] rows;
+}
+
 public class TileSpawning : MonoBehaviour
 {
     public Grid grid;
@@ -14,7 +28,11 @@ public class TileSpawning : MonoBehaviour
     //Water tile
     public TileBase waterTile;
     public TileBase landTile;
+    public TileBase coastlineTile;
     public TileBase[] decorationTiles;
+
+    //3d grid of tiles for the port
+    public TileLayer portTiles;
 
     public Vector3Int bottomLeftCell;
     public Vector3Int topRightCell;
@@ -22,6 +40,10 @@ public class TileSpawning : MonoBehaviour
 
     public List<Vector3Int> coastLines;
     private Camera mainCamera;
+
+    private float nextPortTimer = 0;
+    private bool portSpawning = false;
+    private int portIndex = 0;
 
     void Awake()
     {
@@ -60,8 +82,15 @@ public class TileSpawning : MonoBehaviour
     {
         //Move the grid down 2 unit per second
         grid.transform.position -= new Vector3(0, 2 * Time.deltaTime, 0);
-        despawnBottomRow();
+        //Every x amount of time start to make a port
+        if (Time.time > nextPortTimer)
+        {
+            //Spawn port
+            portSpawning = true;
+            nextPortTimer = Time.time + Random.Range(60, 100);
+        }
         spawnTopRow(coastLines);
+        despawnBottomRow();
     }
 
     //Get the corners of the camera's view in world coordinates
@@ -173,15 +202,32 @@ public class TileSpawning : MonoBehaviour
                 waterTilemap.SetTile(new Vector3Int(x, topRightCell.y, 0), waterTile);
                 waterTilemap.SetTransformMatrix(new Vector3Int(x, topRightCell.y, 0), Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 4) * 90), Vector3.one));
             }
-            foreach (Vector3Int cell in xLines)
+            if (portSpawning)
             {
-                baseTilemap.SetTile(new Vector3Int(cell.x, topRightCell.y, 0), landTile);
-                if (Random.Range(0, 100) < 30)
+                int column = topRightCell.x;
+                //Spawn the port tiles of the index starting from the right of the screen using the portIndex to tell what row
+                for (int i = portTiles.rows[portIndex].tiles.Length - 1; i >= 0; i--) //Because I put the port tiles in the array backwards and this is easier than changing them all
                 {
-                    decorationTilemap.SetTile(new Vector3Int(cell.x, topRightCell.y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
+                    baseTilemap.SetTile(new Vector3Int(column, topRightCell.y, 0), portTiles.rows[portIndex].tiles[i]);
+                    column--;
+                }
+                portIndex++;
+                if (portIndex >= portTiles.rows.Length)
+                {
+                    portSpawning = false;
+                }
+            }
+            else
+            {
+                foreach (Vector3Int cell in xLines)
+                {
+                    baseTilemap.SetTile(new Vector3Int(cell.x, topRightCell.y, 0), landTile);
+                    if (Random.Range(0, 100) < 30)
+                    {
+                        decorationTilemap.SetTile(new Vector3Int(cell.x, topRightCell.y, 0), decorationTiles[Random.Range(0, decorationTiles.Length)]);
+                    }
                 }
             }
         }
     }
-
 }
