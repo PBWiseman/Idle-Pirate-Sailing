@@ -70,8 +70,13 @@ public class BoatMovement : MonoBehaviour
             //If there is no touch input, rotate the boat back to its original position
             boat.transform.rotation = Quaternion.Slerp(boat.transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
         }
-    }
 
+        //If the boats X position is in the tile columns covered by the TileSpawning.Instance.coastLines array debug it
+        if (transform.position.x < TileSpawning.Instance.coastLines[0].x && transform.position.x > TileSpawning.Instance.coastLines[TileSpawning.Instance.coastLines.Count - 1].x)
+        {
+            ShopUI.Instance.SellItems();
+        }
+    }
     private void RotateBoat(float rotationSpeed)
     {
         float currentZAngle = boat.transform.rotation.eulerAngles.z;

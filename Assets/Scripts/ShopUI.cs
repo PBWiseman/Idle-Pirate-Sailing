@@ -36,8 +36,8 @@ public class ShopUI : MonoBehaviour
         foreach (LootAmount loot in PlayerInventory.Instance.inventory)
         {
             salePrice += loot.amount * (int)loot.lootType;
-            PlayerInventory.Instance.RemoveLoot(loot.lootType, loot.amount);
         }
+        PlayerInventory.Instance.ClearInventory();
         PlayerInventory.Instance.AddLoot(LootType.Copper, salePrice);
     }
 

@@ -51,12 +51,11 @@ public class MainUI : MonoBehaviour
             AddedLoot.RemoveAt(0);
         }
         debugAdded.text = "";
-        foreach (string loot in AddedLoot)
+        for (int i = AddedLoot.Count - 1; i >= 0; i--)
         {
-            debugAdded.text += loot + " ";
+            debugAdded.text += AddedLoot[i] + " ";
         }
         PrintInventory();
-        
     }
 
     private void PrintInventory()
@@ -64,15 +63,17 @@ public class MainUI : MonoBehaviour
         if (PlayerInventory.Instance.inventory.Count == 0)
         {
             debugInventory.text = "Inventory: Empty";
-            return;
         }
-        debugInventory.text = "Inventory " + PlayerInventory.Instance.CapacityRegular + ": ";
-        foreach (LootAmount loot in PlayerInventory.Instance.inventory)
+        else
         {
-            debugInventory.text += loot.lootType + ": " + loot.amount + " - ";
+            debugInventory.text = "Inventory " + PlayerInventory.Instance.CapacityRegular + ": ";
+            foreach (LootAmount loot in PlayerInventory.Instance.inventory)
+            {
+                debugInventory.text += loot.lootType + ": " + loot.amount + " - ";
+            }
+            //remove the last " - " from the string
+            debugInventory.text = debugInventory.text.Remove(debugInventory.text.Length - 3);
         }
-        //remove the last " - " from the string
-        debugInventory.text = debugInventory.text.Remove(debugInventory.text.Length - 3);
         debugInventory.text += "\n" + PlayerInventory.Instance.CoinDisplay;
     }
 

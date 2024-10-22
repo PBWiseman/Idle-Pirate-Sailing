@@ -188,6 +188,6 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Returns a string with the amount of coins the player has
     /// </summary>
-    public string CoinDisplay => "Gold: " + Coins / 10000 + "- Silver: " + (Coins % 10000) / 100 + "- Copper: " + Coins % 100;
+    public string CoinDisplay => "Gold: " + Coins / 10000 + " - Silver: " + (Coins % 10000) / 100 + " - Copper: " + Coins % 100;
 
 }

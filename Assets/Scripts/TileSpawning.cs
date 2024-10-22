@@ -87,7 +87,7 @@ public class TileSpawning : MonoBehaviour
         {
             //Spawn port
             portSpawning = true;
-            nextPortTimer = Time.time + Random.Range(60, 100);
+            nextPortTimer = Time.time + Random.Range(30, 60);
         }
         spawnTopRow(coastLines);
         despawnBottomRow();
