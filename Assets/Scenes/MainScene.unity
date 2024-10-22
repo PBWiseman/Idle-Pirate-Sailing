@@ -631,27 +631,27 @@ MonoBehaviour:
     - tiles:
       - {fileID: 0}
       - {fileID: 0}
-      - {fileID: 11400000, guid: 3da1f6a2c5d27e140a064fd75c24979b, type: 2}
+      - {fileID: 0}
     - tiles:
       - {fileID: 0}
       - {fileID: 0}
-      - {fileID: 11400000, guid: 3da1f6a2c5d27e140a064fd75c24979b, type: 2}
+      - {fileID: 0}
     - tiles:
       - {fileID: 0}
       - {fileID: 0}
-      - {fileID: 11400000, guid: 3da1f6a2c5d27e140a064fd75c24979b, type: 2}
+      - {fileID: 0}
     - tiles:
       - {fileID: 0}
       - {fileID: 0}
-      - {fileID: 11400000, guid: 3da1f6a2c5d27e140a064fd75c24979b, type: 2}
+      - {fileID: 0}
     - tiles:
       - {fileID: 0}
       - {fileID: 0}
-      - {fileID: 11400000, guid: 3da1f6a2c5d27e140a064fd75c24979b, type: 2}
+      - {fileID: 0}
     - tiles:
       - {fileID: 0}
       - {fileID: 0}
-      - {fileID: 11400000, guid: 3da1f6a2c5d27e140a064fd75c24979b, type: 2}
+      - {fileID: 0}
     - tiles:
       - {fileID: 0}
       - {fileID: 11400000, guid: 6a286d8175715c64284c602a4add8dee, type: 2}
