@@ -215,6 +215,7 @@ public class TileSpawning : MonoBehaviour
                 if (portIndex >= portTiles.rows.Length)
                 {
                     portSpawning = false;
+                    portIndex = 0;
                 }
             }
             else

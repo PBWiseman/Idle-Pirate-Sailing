@@ -8,13 +8,13 @@ using UnityEngine;
 /// </summary>
 public enum LootType
 {
-    Fabric,
-    Wood,
-    Metal,
-    Gold,
-    Silver,
-    Copper,
-    IdleLoot
+    Fabric = 5,
+    Wood = 10,
+    Metal = 20,
+    Gold = 10000,
+    Silver = 100,
+    Copper = 1,
+    IdleLoot = 2
 }
 
 public class LootAmount

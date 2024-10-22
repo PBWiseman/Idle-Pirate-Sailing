@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 93f7e9a59d7217c4e87a5ca1c8a0aab7, type: 3}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[0].max
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[0].min
@@ -78,11 +78,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[0].lootType
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[1].lootType
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[0].maxExclusive

@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: debrisSprites.Array.data[0]
@@ -73,16 +73,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
+      propertyPath: lootGeneration.Array.data[1].min
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[2].max
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[0].lootType
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[1].lootType
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[2].lootType

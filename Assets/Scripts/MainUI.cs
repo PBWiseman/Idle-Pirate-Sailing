@@ -73,6 +73,7 @@ public class MainUI : MonoBehaviour
         }
         //remove the last " - " from the string
         debugInventory.text = debugInventory.text.Remove(debugInventory.text.Length - 3);
+        debugInventory.text += "\n" + PlayerInventory.Instance.CoinDisplay;
     }
 
     public void UpdateFps(int fps)

@@ -114,23 +114,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[0].lootType
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[1].lootType
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[2].lootType
-      value: 3
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[3].lootType
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3579987342613323088, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: lootGeneration.Array.data[4].lootType
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3687605944791927420, guid: 8dc76ad5778f815459b5bee7c59cb0a6, type: 3}
       propertyPath: m_Name
