@@ -3,7 +3,7 @@ guid: 54f14e01ba240d54a85fe775fb5dce5b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -74,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -86,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -98,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -110,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -122,6 +129,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -642,53 +650,52 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      assets11_5: 197450225
+      assets11_0: -1339183046
+      assets11_1: -2012900421
+      assets11_10: -980139893
+      assets11_11: 280091128
+      assets11_12: -1231619158
+      assets11_13: -24067452
+      assets11_14: 954023972
+      assets11_15: -611639395
+      assets11_16: 275190749
+      assets11_17: 1528649775
+      assets11_18: 1770075602
       assets11_19: 460699457
       assets11_2: 1082260616
+      assets11_20: -1852565561
+      assets11_21: -1179111582
       assets11_22: -290243311
-      assets11_40: -1875520604
-      assets11_36: -709659217
-      assets11_8: 1700333217
-      assets11_11: 280091128
-      assets11_30: 66694557
-      assets11_12: -1231619158
-      assets11_9: 2141713568
+      assets11_23: -1456330944
+      assets11_24: 487564224
       assets11_25: -557906722
-      assets11_10: -980139893
+      assets11_26: 147640491
+      assets11_27: -1664509873
+      assets11_28: 825385373
+      assets11_29: -567262405
+      assets11_3: -1669357632
+      assets11_30: 66694557
+      assets11_31: -719312918
+      assets11_32: -1374385270
+      assets11_33: -875600657
+      assets11_34: -262398029
+      assets11_35: -898200190
+      assets11_36: -709659217
+      assets11_37: 1967704267
       assets11_38: 181419569
       assets11_39: -790099129
-      assets11_42: 1711720989
-      assets11_21: -1179111582
-      assets11_24: 487564224
-      assets11_27: -1664509873
-      assets11_41: 1914107297
-      assets11_26: 147640491
-      assets11_33: -875600657
-      assets11_16: 275190749
-      assets11_6: -1813183674
-      assets11_15: -611639395
-      assets11_3: -1669357632
       assets11_4: 1148165490
-      assets11_17: 1528649775
-      assets11_13: -24067452
+      assets11_40: -1875520604
+      assets11_41: 1914107297
+      assets11_42: 1711720989
       assets11_43: -580688503
-      assets11_32: -1374385270
-      assets11_34: -262398029
-      assets11_18: 1770075602
-      assets11_20: -1852565561
-      assets11_29: -567262405
-      assets11_28: 825385373
-      assets11_14: 954023972
+      assets11_5: 197450225
+      assets11_6: -1813183674
       assets11_7: 2003616315
-      assets11_1: -2012900421
-      assets11_23: -1456330944
-      assets11_35: -898200190
-      assets11_31: -719312918
-      assets11_37: 1967704267
-      assets11_0: -1339183046
-  spritePackingTag: 
+      assets11_8: 1700333217
+      assets11_9: 2141713568
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

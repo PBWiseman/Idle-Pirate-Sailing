@@ -1,2 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Background" style="flex-grow: 1; -unity-text-outline-color: rgba(0, 0, 0, 0); width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.16); justify-content: center; align-items: center; -unity-font: url(&quot;project://database/Assets/Fonts/TradeWinds-Regular.ttf?fileID=12800000&amp;guid=5797b78fe03db7d41997c9e2db94abc4&amp;type=3#TradeWinds-Regular&quot;); -unity-font-definition: initial; visibility: hidden;">
+        <ui:VisualElement name="ShopBackground" style="flex-grow: 0; width: 90%; height: 90%; background-color: rgba(51, 51, 51, 0); align-self: center; align-items: center; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets2.png?fileID=429234838&amp;guid=21c68b4df7073c24399971b24516c601&amp;type=3#assets2_1&quot;);">
+            <ui:Label tabindex="-1" text="UPGRADES" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Upgrades" style="width: 50%; font-size: 110px; -unity-text-align: middle-center; height: 9%; color: rgb(51, 51, 51); -unity-font: url(&quot;project://database/Assets/Fonts/TradeWinds-Regular.ttf?fileID=12800000&amp;guid=5797b78fe03db7d41997c9e2db94abc4&amp;type=3#TradeWinds-Regular&quot;); white-space: nowrap; flex-grow: 0; flex-shrink: 0; top: 50px;" />
+            <ui:ScrollView style="width: 100%; height: 100%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
