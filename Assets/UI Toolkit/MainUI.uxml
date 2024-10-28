@@ -1,11 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainUI.uss?fileID=7433441132597879392&amp;guid=cdb57bf9b251def4abc12e029c7dabc6&amp;type=3#MainUI" />
-    <ui:VisualElement name="MainContainer" style="flex-grow: 1;">
-        <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Debug_Inv" style="white-space: normal;" />
-        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Debug_Added" />
-        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="fps" style="position: absolute; bottom: 0;" />
-        <ui:VisualElement name="Shop" style="flex-grow: 0; align-self: flex-end; bottom: 0; position: absolute; width: 20%; height: 10%; left: auto; right: 0; margin-right: 50px; margin-bottom: 50px;">
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShopButton" style="background-image: url(&quot;project://database/Assets/Sprites/GUI/assets7.png?fileID=2097989117&amp;guid=175161cc56c702d41ba2bd2d5834318e&amp;type=3#assets7_18&quot;); -unity-background-scale-mode: scale-to-fit; background-color: rgba(188, 188, 188, 0); height: 100%; width: 100%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
-        </ui:VisualElement>
+    <ui:VisualElement name="Shop" style="flex-grow: 0; align-self: flex-end; bottom: auto; position: absolute; width: 20%; height: 10%; left: auto; right: 0; margin-right: 50px; margin-bottom: 0; top: 0; margin-top: 50px;">
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShopButton" style="background-image: url(&quot;project://database/Assets/Sprites/GUI/assets7.png?fileID=2097989117&amp;guid=175161cc56c702d41ba2bd2d5834318e&amp;type=3#assets7_18&quot;); -unity-background-scale-mode: scale-to-fit; background-color: rgba(188, 188, 188, 0); height: 100%; width: 100%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
     </ui:VisualElement>
+    <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="fps" style="position: absolute; bottom: 0; font-size: 65px;" />
+    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Debug_Added" style="width: 75%; font-size: 65px;" />
+    <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Debug_Inv" style="white-space: normal; font-size: 65px; width: 75%;" />
 </ui:UXML>

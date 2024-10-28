@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.EventSystems;
 
 public class BoatMovement : MonoBehaviour
 {
@@ -30,7 +31,10 @@ public class BoatMovement : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
+            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId) || touch.phase == TouchPhase.Ended)
+            {
+                return;
+            }
             //Convert the boat's world position to screen position
             Vector3 boatScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
 

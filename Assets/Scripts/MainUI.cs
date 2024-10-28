@@ -12,6 +12,7 @@ public class MainUI : MonoBehaviour
     private Label debugInventory;
     private Label debugAdded;
     private Label fpsCounter;
+    private Button shopButton;
 
     private List<string> AddedLoot = new List<string>();
 
@@ -34,6 +35,8 @@ public class MainUI : MonoBehaviour
         debugInventory = document.Q<Label>("Debug_Inv");
         debugAdded = document.Q<Label>("Debug_Added");
         fpsCounter = document.Q<Label>("fps");
+        shopButton = document.Q<Button>("ShopButton");
+        shopButton.RegisterCallback<ClickEvent>(ShopUI.Instance.OpenShop);
         StartCoroutine(StartDelay());
     }
 
@@ -68,7 +71,10 @@ public class MainUI : MonoBehaviour
     {
         if (PlayerInventory.Instance.Inventory.inventory == null || PlayerInventory.Instance.Inventory.inventory.Count == 0)
         {
-            debugInventory.text = "Inventory: Empty";
+            if (debugInventory != null)
+            {
+                debugInventory.text = "Inventory: Empty";
+            }
         }
         else
         {
@@ -80,8 +86,11 @@ public class MainUI : MonoBehaviour
             //remove the last " - " from the string
             debugInventory.text = debugInventory.text.Remove(debugInventory.text.Length - 3);
         }
-        debugInventory.text += "\n" + PlayerInventory.Instance.CoinDisplay;
-        debugInventory.text += "\n" + "Idle Loot: " + IdleLoot.Instance.availableLoot() + "/" + IdleLoot.Instance.maxIdleLoot;
+        if (debugInventory != null)
+        {
+            debugInventory.text += "\n" + PlayerInventory.Instance.CoinDisplay;
+            debugInventory.text += "\n" + "Idle Loot: " + IdleLoot.Instance.availableLoot() + "/" + IdleLoot.Instance.maxIdleLoot;
+        }
     }
 
     public void UpdateFps(int fps)
