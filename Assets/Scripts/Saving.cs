@@ -51,6 +51,10 @@ public class Saving : MonoBehaviour
         {
             Save();
         }
+        else
+        {
+            MainUI.Instance.PrintInventory();
+        }
     }
 
     void OnApplicationFocus(bool focus)
@@ -58,6 +62,10 @@ public class Saving : MonoBehaviour
         if (!focus)
         {
             Save();
+        }
+        else
+        {
+            MainUI.Instance.PrintInventory();
         }
     }
 
