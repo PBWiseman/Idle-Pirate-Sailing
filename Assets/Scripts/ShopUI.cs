@@ -33,12 +33,15 @@ public class ShopUI : MonoBehaviour
     {
         //Sell items in the player's inventory
         int salePrice = 0;
-        foreach (LootAmount loot in PlayerInventory.Instance.inventory)
+        foreach (LootAmount loot in PlayerInventory.Instance.Inventory.inventory)
         {
             salePrice += loot.amount * (int)loot.lootType;
         }
         PlayerInventory.Instance.ClearInventory();
         PlayerInventory.Instance.AddLoot(LootType.Copper, salePrice);
+        IdleLoot.Instance.SellIdleLoot();
+        MainUI.Instance.PrintInventory();
+        Saving.Instance.Save();
     }
 
     public void PurchaseUpgrade()

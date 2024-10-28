@@ -34,6 +34,12 @@ public class MainUI : MonoBehaviour
         debugInventory = document.Q<Label>("Debug_Inv");
         debugAdded = document.Q<Label>("Debug_Added");
         fpsCounter = document.Q<Label>("fps");
+        StartCoroutine(StartDelay());
+    }
+
+    private IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(.2f);
         PrintInventory();
     }
 
@@ -58,16 +64,16 @@ public class MainUI : MonoBehaviour
         PrintInventory();
     }
 
-    private void PrintInventory()
+    public void PrintInventory()
     {
-        if (PlayerInventory.Instance.inventory.Count == 0)
+        if (PlayerInventory.Instance.Inventory.inventory == null || PlayerInventory.Instance.Inventory.inventory.Count == 0)
         {
             debugInventory.text = "Inventory: Empty";
         }
         else
         {
             debugInventory.text = "Inventory " + PlayerInventory.Instance.CapacityRegular + ": ";
-            foreach (LootAmount loot in PlayerInventory.Instance.inventory)
+            foreach (LootAmount loot in PlayerInventory.Instance.Inventory.inventory)
             {
                 debugInventory.text += loot.lootType + ": " + loot.amount + " - ";
             }
@@ -75,6 +81,7 @@ public class MainUI : MonoBehaviour
             debugInventory.text = debugInventory.text.Remove(debugInventory.text.Length - 3);
         }
         debugInventory.text += "\n" + PlayerInventory.Instance.CoinDisplay;
+        debugInventory.text += "\n" + "Idle Loot: " + IdleLoot.Instance.availableLoot() + "/" + IdleLoot.Instance.maxIdleLoot;
     }
 
     public void UpdateFps(int fps)

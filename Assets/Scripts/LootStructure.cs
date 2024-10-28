@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// The type of loot that can be dropped
 /// Note: The values of the enum are the values of the loot type
 /// </summary>
-[System.Serializable]
+[Serializable]
 public enum LootType
 {
     Fabric = 5,
@@ -14,17 +16,23 @@ public enum LootType
     Metal = 20,
     Gold = 10000,
     Silver = 100,
-    Copper = 1,
-    IdleLoot = 2
+    Copper = 1
 }
-[System.Serializable]
+[Serializable]
 public class LootAmount
 {
     public LootType lootType;
     public int amount;
 }
 
-[System.Serializable]
+[Serializable]
+public class Inventory
+{
+    public List<LootAmount> inventory = new List<LootAmount>();
+    public int coins = 0;
+}
+
+[Serializable]
 public class LootTable
 {
     public List<LootAmount> lootTable = new List<LootAmount>();
