@@ -6,6 +6,7 @@ using UnityEngine;
 /// The type of loot that can be dropped
 /// Note: The values of the enum are the values of the loot type
 /// </summary>
+[System.Serializable]
 public enum LootType
 {
     Fabric = 5,
@@ -16,7 +17,7 @@ public enum LootType
     Copper = 1,
     IdleLoot = 2
 }
-
+[System.Serializable]
 public class LootAmount
 {
     public LootType lootType;

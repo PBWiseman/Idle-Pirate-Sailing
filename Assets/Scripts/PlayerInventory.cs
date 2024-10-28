@@ -35,6 +35,11 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        inventory = Saving.Instance.Load();
+    }
+
     /// <summary>
     /// Adds the specified amount of loot to the player's inventory
     /// </summary>
