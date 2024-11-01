@@ -10,6 +10,7 @@ public class ShopUI : MonoBehaviour
     public UIDocument document;
     private VisualElement background;
     private Button closeButton;
+    
 
     void Awake()
     {

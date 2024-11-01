@@ -13,7 +13,6 @@ public class Saving : MonoBehaviour
     private const string IDLE_LOOT_VALUE = "IdleLootValue";
     private const string MAX_IDLE_LOOT = "MaxIdleLoot";
 
-
     //Persistent data path
     private string savePath => $"{Application.persistentDataPath}/inventory.json";
 
