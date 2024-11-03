@@ -1,9 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Upgrade" src="project://database/Assets/UI%20Toolkit/Upgrade.uxml?fileID=9197481963319205126&amp;guid=07fdd20d65ea44d44bc80ac53c78bfd7&amp;type=3#Upgrade" />
     <ui:VisualElement name="Background" style="flex-grow: 1; -unity-text-outline-color: rgba(0, 0, 0, 0); width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.16); justify-content: center; align-items: center; -unity-font: url(&quot;project://database/Assets/Fonts/TradeWinds-Regular.ttf?fileID=12800000&amp;guid=5797b78fe03db7d41997c9e2db94abc4&amp;type=3#TradeWinds-Regular&quot;); -unity-font-definition: initial; visibility: visible;">
-        <ui:VisualElement name="ShopBackground" style="flex-grow: 0; width: 90%; height: 90%; background-color: rgba(51, 51, 51, 0); align-self: center; align-items: center; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets2.png?fileID=429234838&amp;guid=21c68b4df7073c24399971b24516c601&amp;type=3#assets2_1&quot;);">
-            <LabelAutoFit name="Upgrades" text="UPGRADES" style="max-width: 53%; width: 415px; -unity-text-align: middle-center; padding-top: 55px;" />
+        <ui:VisualElement name="ShopBackground" style="flex-grow: 0; width: 90%; height: 90%; background-color: rgba(51, 51, 51, 0); align-self: center; align-items: center; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets2.png?fileID=429234838&amp;guid=21c68b4df7073c24399971b24516c601&amp;type=3#assets2_1&quot;); justify-content: center;">
+            <LabelAutoFit name="Upgrades" text="UPGRADES" style="max-width: 53%; width: 415px; -unity-text-align: middle-center; padding-top: 55px; align-self: center; position: absolute; top: 0;" />
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="CloseButton" style="right: 50px; top: 55px; position: absolute; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets4.png?fileID=65711382&amp;guid=f0b67ba966aa7a14396a0188248cb3d3&amp;type=3#assets4_29&quot;); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; height: 163px; width: 163px;" />
-            <ui:ScrollView style="width: 100%; height: 100%; padding-top: 55px;" />
+            <ui:ScrollView style="width: 90%; height: 80%; padding-top: 55px; align-self: center;">
+                <ui:Instance template="Upgrade" name="Upgrade" />
+                <ui:Instance template="Upgrade" name="Upgrade" />
+                <ui:Instance template="Upgrade" name="Upgrade" />
+                <ui:Instance template="Upgrade" name="Upgrade" />
+            </ui:ScrollView>
         </ui:VisualElement>
     </ui:VisualElement>
     <LabelAutoFit />
