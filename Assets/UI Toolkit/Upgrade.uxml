@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Upgrade" style="flex-grow: 1; flex-direction: column; -unity-font: url(&quot;project://database/Assets/Fonts/TradeWinds-Regular.ttf?fileID=12800000&amp;guid=5797b78fe03db7d41997c9e2db94abc4&amp;type=3#TradeWinds-Regular&quot;); -unity-font-definition: initial; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets1.png?fileID=-135169657&amp;guid=77c78af0608157b4295b0125bb219bf8&amp;type=3#assets1_3&quot;);">
+        <ui:Label tabindex="-1" text="UpgradeName" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UpgradeName" style="width: 100%; -unity-text-align: middle-center; font-size: 30px;" />
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="CurrentLevel" style="flex-grow: 1;" />
+            <ui:VisualElement name="Cost" style="flex-grow: 0;">
+                <ui:Label tabindex="-1" text="Cost" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CostText" style="font-size: 20px; -unity-text-align: middle-center; height: 20px;" />
+                <ui:VisualElement name="Gold" style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets5.png?fileID=1954563645&amp;guid=c5e0965bb249ab2488d4e772af463ae9&amp;type=3#assets5_0&quot;); -unity-background-scale-mode: scale-to-fit; flex-shrink: 0; width: 50px;" />
+                    <ui:Label tabindex="-1" text="99999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GoldText" style="font-size: 20px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Silver" style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets5.png?fileID=-1048698702&amp;guid=c5e0965bb249ab2488d4e772af463ae9&amp;type=3#assets5_1&quot;); -unity-background-scale-mode: scale-to-fit; width: 50px;" />
+                    <ui:Label tabindex="-1" text="99" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SilverText" style="font-size: 20px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Copper" style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets5.png?fileID=-2058965697&amp;guid=c5e0965bb249ab2488d4e772af463ae9&amp;type=3#assets5_2&quot;); -unity-background-scale-mode: scale-to-fit; width: 50px;" />
+                    <ui:Label tabindex="-1" text="99" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CopperText" style="font-size: 20px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Buy" style="font-size: 30px; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets1.png?fileID=1592183753&amp;guid=77c78af0608157b4295b0125bb219bf8&amp;type=3#assets1_8&quot;); background-color: rgba(255, 255, 255, 0); -unity-background-scale-mode: scale-to-fit; width: 142px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
