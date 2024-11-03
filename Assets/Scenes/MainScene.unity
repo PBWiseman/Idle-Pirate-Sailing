@@ -652,6 +652,10 @@ MonoBehaviour:
     - tiles:
       - {fileID: 0}
       - {fileID: 0}
+      - {fileID: 0}
+    - tiles:
+      - {fileID: 0}
+      - {fileID: 0}
       - {fileID: 11400000, guid: 6a286d8175715c64284c602a4add8dee, type: 2}
     - tiles:
       - {fileID: 0}

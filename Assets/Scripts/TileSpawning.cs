@@ -208,7 +208,11 @@ public class TileSpawning : MonoBehaviour
                 //Spawn the port tiles of the index starting from the right of the screen using the portIndex to tell what row
                 for (int i = portTiles.rows[portIndex].tiles.Length - 1; i >= 0; i--) //Because I put the port tiles in the array backwards and this is easier than changing them all
                 {
-                    baseTilemap.SetTile(new Vector3Int(column, topRightCell.y, 0), portTiles.rows[portIndex].tiles[i]);
+                    decorationTilemap.SetTile(new Vector3Int(column, topRightCell.y, 0), portTiles.rows[portIndex].tiles[i]);
+                    if (portTiles.rows[portIndex].tiles[i] != null || portTiles.rows[portIndex].tiles[0] != null)
+                    {
+                        baseTilemap.SetTile(new Vector3Int(column, topRightCell.y, 0), landTile);
+                    }
                     column--;
                 }
                 portIndex++;
