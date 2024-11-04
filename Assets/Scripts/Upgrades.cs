@@ -12,10 +12,22 @@ public enum UpgradeType
     SellValue
 }
 
+public class UpgradeDictionary
+{
+    public static Dictionary<UpgradeType, string> upgradeNames = new Dictionary<UpgradeType, string>
+    {
+        { UpgradeType.InventorySize, "Inventory Size" },
+        { UpgradeType.IdleLootValue, "Idle Loot Value" },
+        { UpgradeType.MaxIdleLoot, "Max Idle Loot" },
+        { UpgradeType.SellValue, "Sell Value" }
+    };
+}
+
 [Serializable]
 public class Upgrade
 {
     public UpgradeType upgradeType;
+    public string upgradeName => UpgradeDictionary.upgradeNames[upgradeType];
     public int currentLevel;
     public int maxLevel; //If maxLevel is -1 upgrade is uncapped
     public int upgradeCost;

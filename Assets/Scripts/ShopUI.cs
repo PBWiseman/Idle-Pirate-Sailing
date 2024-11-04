@@ -10,6 +10,8 @@ public class ShopUI : MonoBehaviour
     public UIDocument document;
     private VisualElement background;
     private Button closeButton;
+    private VisualElement[] upgrades = new VisualElement[4];
+    private Upgrade[] upgradeSaveData;
     
 
     void Awake()
@@ -31,12 +33,22 @@ public class ShopUI : MonoBehaviour
         closeButton = document.rootVisualElement.Q<Button>("CloseButton");
         closeButton.RegisterCallback<ClickEvent>(CloseButton);
         background.visible = false;
+        for (int i = 0; i < upgrades.length; i++)
+        {
+            upgrades[i] = document.rootVisualElement.Q<VisualElement>("Upgrade" + i);
+        }
+        //Call the save data for the upgrades
     }
 
-    // Update is called once per frame
-    void Update()
+    private void displayUpgrades()
     {
-        
+        for (int i = 0; i < upgrades.length; i++)
+        {
+            upgrades[i].Q<Label>("UpgradeName").text = upgradeSaveData[i].upgradeName;
+            upgrades[i].Q<Label>("UpgradeLevel").text = upgradeSaveData[i].currentLevel.ToString();
+            upgrades[i].Q<Label>("UpgradeCost").text = upgradeSaveData[i].GetUpgradeCost().ToString();
+            upgrades[i].Q<Label>("UpgradeValue").text = upgradeSaveData[i].upgradeValue.ToString();
+        }
     }
 
     public void CloseButton(ClickEvent evt)
