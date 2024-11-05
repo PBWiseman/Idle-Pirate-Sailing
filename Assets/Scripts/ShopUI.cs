@@ -33,7 +33,7 @@ public class ShopUI : MonoBehaviour
         closeButton = document.rootVisualElement.Q<Button>("CloseButton");
         closeButton.RegisterCallback<ClickEvent>(CloseButton);
         background.visible = false;
-        for (int i = 0; i < upgrades.length; i++)
+        for (int i = 0; i < upgrades.Count(); i++)
         {
             upgrades[i] = document.rootVisualElement.Q<VisualElement>("Upgrade" + i);
         }
@@ -42,7 +42,7 @@ public class ShopUI : MonoBehaviour
 
     private void displayUpgrades()
     {
-        for (int i = 0; i < upgrades.length; i++)
+        for (int i = 0; i < upgrades.Count(); i++)
         {
             upgrades[i].Q<Label>("UpgradeName").text = upgradeSaveData[i].upgradeName;
             upgrades[i].Q<Label>("UpgradeLevel").text = upgradeSaveData[i].currentLevel.ToString();

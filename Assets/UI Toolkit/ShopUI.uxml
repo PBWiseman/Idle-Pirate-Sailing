@@ -5,10 +5,10 @@
             <LabelAutoFit name="Upgrades" text="UPGRADES" style="max-width: 53%; width: 415px; -unity-text-align: middle-center; padding-top: 55px; align-self: center; position: absolute; top: 0;" />
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="CloseButton" style="right: 50px; top: 55px; position: absolute; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets4.png?fileID=65711382&amp;guid=f0b67ba966aa7a14396a0188248cb3d3&amp;type=3#assets4_29&quot;); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; height: 163px; width: 163px;" />
             <ui:ScrollView style="width: 90%; height: 80%; padding-top: 55px; align-self: center;">
-                <ui:Instance template="Upgrade" name="Upgrade" />
-                <ui:Instance template="Upgrade" name="Upgrade" />
-                <ui:Instance template="Upgrade" name="Upgrade" />
-                <ui:Instance template="Upgrade" name="Upgrade" />
+                <ui:Instance template="Upgrade" name="Upgrade1" />
+                <ui:Instance template="Upgrade" name="Upgrade2" />
+                <ui:Instance template="Upgrade" name="Upgrade3" />
+                <ui:Instance template="Upgrade" name="Upgrade4" />
             </ui:ScrollView>
         </ui:VisualElement>
     </ui:VisualElement>
