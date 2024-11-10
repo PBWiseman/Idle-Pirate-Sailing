@@ -6,7 +6,11 @@ using System;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField]public Inventory Inventory = new Inventory();
+    public Inventory Inventory
+    {
+        get => Saving.Instance.Inventory;
+        set => Saving.Instance.Inventory = value;
+    }
 
     public int Coins
     {
@@ -14,7 +18,14 @@ public class PlayerInventory : MonoBehaviour
         set => Inventory.coins = value;
     }
 
-    public int maxInventorySize = 50; //Starts at 50. Can be upgraded
+    public int maxInventorySize
+    {
+        get 
+        {
+            Upgrade upgrade = Saving.Instance.Upgrades.GetUpgrade(UpgradeType.InventorySize);
+            return upgrade.GetCurrentValue();
+        }
+    }
 
     public static PlayerInventory Instance;
     
@@ -172,5 +183,9 @@ public class PlayerInventory : MonoBehaviour
     /// Returns a string with the amount of coins the player has
     /// </summary>
     public string CoinDisplay => "Gold: " + Coins / 10000 + " - Silver: " + (Coins % 10000) / 100 + " - Copper: " + Coins % 100;
+
+    public int ConvertGold(int coins) => coins / 10000;
+    public int ConvertSilver(int coins) => (coins % 10000) / 100;
+    public int ConvertCopper(int coins) => coins % 100;
 
 }

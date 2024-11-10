@@ -5,13 +5,29 @@ using System;
 
 public class IdleLoot : MonoBehaviour
 {
-    public DateTime lastCollected;
+    DateTime lastCollected
+    {
+        get => Saving.Instance.LastCollected;
+        set => Saving.Instance.LastCollected = value;
+    }
 
-    [HideInInspector]
-    public int maxIdleLoot;
+    int maxIdleLoot
+    {
+        get
+        {
+            Upgrade upgrade = Saving.Instance.Upgrades.GetUpgrade(UpgradeType.MaxIdleLoot);
+            return upgrade.GetCurrentValue();
+        }
+    }
 
-    [HideInInspector]
-    public int idleLootValue;
+    int idleLootValue
+    {
+        get
+        {
+            Upgrade upgrade = Saving.Instance.Upgrades.GetUpgrade(UpgradeType.IdleLootValue);
+            return upgrade.GetCurrentValue();
+        }
+    }
 
     public static IdleLoot Instance;
     void Awake()
@@ -24,11 +40,6 @@ public class IdleLoot : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-    
-    void Start()
-    {
-        Saving.Instance.LoadIdleLoot();
     }
 
     public void SellIdleLoot()
@@ -50,9 +61,17 @@ public class IdleLoot : MonoBehaviour
 
     public int availableLoot()
     {
-        TimeSpan timeSinceLastCollected = DateTime.Now - lastCollected;
-        int lootAmount = (int)timeSinceLastCollected.TotalSeconds / 60;
-        lootAmount = Math.Clamp(lootAmount, 0, maxIdleLoot);
-        return lootAmount;
+        try
+        {
+            TimeSpan timeSinceLastCollected = DateTime.Now - lastCollected;
+            int lootAmount = (int)timeSinceLastCollected.TotalSeconds / 60;
+            lootAmount = Math.Clamp(lootAmount, 0, maxIdleLoot);
+            return lootAmount;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+            return 0;
+        }
     }
 }

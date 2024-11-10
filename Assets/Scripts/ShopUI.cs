@@ -10,8 +10,7 @@ public class ShopUI : MonoBehaviour
     public UIDocument document;
     private VisualElement background;
     private Button closeButton;
-    private VisualElement[] upgrades = new VisualElement[4];
-    private Upgrade[] upgradeSaveData;
+    private VisualElement[] upgradesButtons = new VisualElement[4];
     
 
     void Awake()
@@ -35,19 +34,32 @@ public class ShopUI : MonoBehaviour
         background.visible = false;
         for (int i = 0; i < upgrades.Count(); i++)
         {
-            upgrades[i] = document.rootVisualElement.Q<VisualElement>("Upgrade" + i);
+            upgrades[i] = document.rootVisualElement.Q<VisualElement>("Upgrade" + i+1);
         }
-        //Call the save data for the upgrades
     }
 
     private void displayUpgrades()
     {
-        for (int i = 0; i < upgrades.Count(); i++)
+        for (int i = 0; i < upgradesButtons.Count(); i++)
         {
-            upgrades[i].Q<Label>("UpgradeName").text = upgradeSaveData[i].upgradeName;
-            upgrades[i].Q<Label>("UpgradeLevel").text = upgradeSaveData[i].currentLevel.ToString();
-            upgrades[i].Q<Label>("UpgradeCost").text = upgradeSaveData[i].GetUpgradeCost().ToString();
-            upgrades[i].Q<Label>("UpgradeValue").text = upgradeSaveData[i].upgradeValue.ToString();
+            Upgrade upgrade = Saving.Instance.Upgrades.upgrades[i];
+            upgrades[i].Q<Label>("UpgradeName").text = upgrade.upgradeName;
+            upgrades[i].Q<Label>("CurrentValue").text = upgrade.GetCurrentValue();
+            if (upgrade.CanUpgrade())
+            {
+                upgrades[i].Q<Label>("AddedValue").text = upgrade.upgradeValue;
+                upgrades[i].Q<Label>("GoldText").text = PlayerInventory.Instance.ConvertGold(upgrade.GetUpgradeCost());
+                upgrades[i].Q<Label>("SilverText").text = PlayerInventory.Instance.ConvertSilver(upgrade.GetUpgradeCost());
+                upgrades[i].Q<Label>("CopperText").text = PlayerInventory.Instance.ConvertCopper(upgrade.GetUpgradeCost());
+            }
+            else
+            {
+                upgrades[i].Q<Label>("AddedValue").text = "Max";
+                upgrades[i].Q<Label>("GoldText").text = "0";
+                upgrades[i].Q<Label>("SilverText").text = "0";
+                upgrades[i].Q<Label>("CopperText").text = "0";
+            }
+            upgrades[i].Q<Button>("Buy").RegisterCallback<ClickEvent>(evt => PurchaseUpgrade(evt, i));
         }
     }
 
@@ -60,13 +72,14 @@ public class ShopUI : MonoBehaviour
     public void OpenShop(ClickEvent evt)
     {
         Debug.Log("Opening Shop");
+        displayUpgrades();
         background.visible = true;
     }
 
     public void SellItems()
     {
         //Sell items in the player's inventory
-        int salePrice = PlayerInventory.Instance.Inventory.inventory.Sum(loot => loot.amount * (int)loot.lootType);
+        int salePrice = (PlayerInventory.Instance.Inventory.inventory.Sum(loot => loot.amount * (int)loot.lootType)) * Saving.Instance.Upgrades.GetUpgrade(UpgradeType.SellValue).GetCurrentValue();
         PlayerInventory.Instance.ClearInventory();
         PlayerInventory.Instance.AddLoot(LootType.Copper, salePrice);
         IdleLoot.Instance.SellIdleLoot();
@@ -74,18 +87,20 @@ public class ShopUI : MonoBehaviour
         Saving.Instance.Save();
     }
 
-    public void PurchaseUpgrade()
+    public void PurchaseUpgrade(ClickEvent evt, int upgradeIndex)
     {
         int price = 0;
-        //Code for buying the upgrade
-        //Check if the player has enough coins
+        Upgrade upgrade = Saving.Instance.Upgrades.upgrades[upgradeIndex];
+        price = upgrade.GetUpgradeCost();
         if (PlayerInventory.Instance.PayWithCoins(price))
         {
-            //Success
+            upgrade.UpgradeLevel();
+            Saving.Instance.Save();
+            displayUpgrades();
         }
         else
         {
-            //Failure
+            Debug.Log("Not enough coins");
         }
     }
 }

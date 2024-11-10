@@ -32,19 +32,21 @@ public class Upgrade
     public int maxLevel; //If maxLevel is -1 upgrade is uncapped
     public int upgradeCost;
     public int upgradeValue;
+    public int baseValue;
 
-    public Upgrade(UpgradeType upgradeType, int currentLevel, int maxLevel, int upgradeCost, int upgradeValue)
+    public Upgrade(UpgradeType upgradeType, int currentLevel, int maxLevel, int upgradeCost, int upgradeValue, int baseValue)
     {
         this.upgradeType = upgradeType;
         this.currentLevel = currentLevel;
         this.maxLevel = maxLevel;
         this.upgradeCost = upgradeCost;
         this.upgradeValue = upgradeValue;
+        this.baseValue = baseValue;
     }
 
     public int GetCurrentValue()
     {
-        return upgradeValue * currentLevel;
+        return baseValue + (upgradeValue * (currentLevel-1));
     }
 
     public int GetUpgradeCost()
@@ -73,15 +75,9 @@ public class Upgrades
 {
     public List<Upgrade> upgrades = new List<Upgrade>();
 
-    public void ConvertSaveData(UpgradeSaveData upgradeSaveData)
+    public void AddUpgrade(UpgradeType upgradeType, int currentLevel, int maxLevel, int upgradeCost, int upgradeValue, int baseValue)
     {
-        Upgrade upgrade = GetUpgrade(upgradeSaveData.upgradeType);
-        upgrade.currentLevel = upgradeSaveData.currentLevel;
-    }
-
-    public void AddUpgrade(UpgradeType upgradeType, int currentLevel, int maxLevel, int upgradeCost, int upgradeValue)
-    {
-        upgrades.Add(new Upgrade(upgradeType, currentLevel, maxLevel, upgradeCost, upgradeValue));
+        upgrades.Add(new Upgrade(upgradeType, currentLevel, maxLevel, upgradeCost, upgradeValue, baseValue));
     }
 
     public Upgrade GetUpgrade(UpgradeType upgradeType)
@@ -90,25 +86,10 @@ public class Upgrades
     }
 }
 
-public class UpgradeSaveData
-{
-    public UpgradeType upgradeType;
-    public int currentLevel;
-
-    public UpgradeSaveData(List<Upgrade> upgrades)
-    {
-        foreach (Upgrade upgrade in upgrades)
-        {
-            upgradeType = upgrade.upgradeType;
-            currentLevel = upgrade.currentLevel;
-        }
-    }
-}
-
 [Serializable]
 public class SaveData
 {
     public Inventory inventory;
-    public UpgradeSaveData upgrades;
-    public int lastCollected;
+    public Upgrades upgrades;
+    public DateTime lastCollected;
 }
