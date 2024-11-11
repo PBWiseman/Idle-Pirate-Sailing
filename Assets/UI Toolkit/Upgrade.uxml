@@ -1,17 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement name="Upgrade" style="flex-grow: 1; flex-direction: column; -unity-font: url(&quot;project://database/Assets/Fonts/TradeWinds-Regular.ttf?fileID=12800000&amp;guid=5797b78fe03db7d41997c9e2db94abc4&amp;type=3#TradeWinds-Regular&quot;); -unity-font-definition: initial; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets1.png?fileID=-135169657&amp;guid=77c78af0608157b4295b0125bb219bf8&amp;type=3#assets1_3&quot;); align-items: center; justify-content: center;">
-        <ui:Label tabindex="-1" text="UpgradeName" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UpgradeName" style="width: auto; -unity-text-align: middle-center; font-size: 40px; -unity-font-style: bold;" />
-        <ui:VisualElement style="flex-grow: 1; flex-direction: row; width: 100%; justify-content: space-around; align-items: stretch; padding-bottom: 10px;">
+        <ui:Label tabindex="-1" text="UpgradeName" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UpgradeName" style="width: auto; -unity-text-align: middle-center; font-size: 50px; -unity-font-style: bold;" />
+        <ui:VisualElement name="UpgradeDetails" style="flex-grow: 1; flex-direction: row; width: 100%; justify-content: space-around; align-items: stretch; padding-bottom: 10px;">
             <ui:VisualElement name="CurrentValue" style="flex-grow: 0; border-right-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-width: 2px; padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px;">
-                <ui:Label tabindex="-1" text="Current Value" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CurrentText" style="font-size: 30px; -unity-text-align: middle-center; height: 20px;" />
+                <ui:Label tabindex="-1" text="Value" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CurrentText" style="font-size: 50px; -unity-text-align: middle-center; height: 20px;" />
                 <ui:Label tabindex="-1" text="99999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Current" style="width: auto; height: auto; flex-grow: 1; font-size: 60px; -unity-text-align: middle-center;" />
             </ui:VisualElement>
             <ui:VisualElement name="AddedValue" style="flex-grow: 0; border-right-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px;">
-                <ui:Label tabindex="-1" text="Added Value" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddedText" style="font-size: 30px; -unity-text-align: middle-center; height: 20px;" />
+                <ui:Label tabindex="-1" text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddedText" style="font-size: 50px; -unity-text-align: middle-center; height: 20px;" />
                 <ui:Label tabindex="-1" text="+50" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Added" style="width: auto; height: auto; flex-grow: 1; font-size: 60px; -unity-text-align: middle-center;" />
             </ui:VisualElement>
             <ui:VisualElement name="Cost" style="flex-grow: 0; border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px;">
-                <ui:Label tabindex="-1" text="Cost" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CostText" style="font-size: 30px; -unity-text-align: middle-center; height: 20px; min-width: 125px;" />
+                <ui:Label tabindex="-1" text="Cost" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CostText" style="font-size: 50px; -unity-text-align: middle-center; height: 20px; min-width: 125px; margin-bottom: 8px;" />
                 <ui:VisualElement name="Gold" style="flex-grow: 1; flex-direction: row;">
                     <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets5.png?fileID=1954563645&amp;guid=c5e0965bb249ab2488d4e772af463ae9&amp;type=3#assets5_0&quot;); -unity-background-scale-mode: scale-to-fit; flex-shrink: 0; width: 50px;" />
                     <ui:Label tabindex="-1" text="99999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GoldText" style="font-size: 40px;" />
@@ -25,7 +25,7 @@
                     <ui:Label tabindex="-1" text="99" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CopperText" style="font-size: 40px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Buy" style="font-size: 30px; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets1.png?fileID=1592183753&amp;guid=77c78af0608157b4295b0125bb219bf8&amp;type=3#assets1_8&quot;); background-color: rgba(255, 255, 255, 0); -unity-background-scale-mode: scale-to-fit; width: 240px;" />
+            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Buy" style="font-size: 60px; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets1.png?fileID=1592183753&amp;guid=77c78af0608157b4295b0125bb219bf8&amp;type=3#assets1_8&quot;); background-color: rgba(255, 255, 255, 0); -unity-background-scale-mode: scale-to-fit; width: 280px; height: 280px; margin-top: -20px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
