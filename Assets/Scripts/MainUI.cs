@@ -69,27 +69,34 @@ public class MainUI : MonoBehaviour
 
     public void PrintInventory()
     {
-        if (PlayerInventory.Instance.Inventory.inventory == null || PlayerInventory.Instance.Inventory.inventory.Count == 0)
+        try
         {
+            if (PlayerInventory.Instance.Inventory.inventory == null || PlayerInventory.Instance.Inventory.inventory.Count == 0)
+            {
+                if (debugInventory != null)
+                {
+                    debugInventory.text = "Inventory: Empty";
+                }
+            }
+            else
+            {
+                debugInventory.text = "Inventory " + PlayerInventory.Instance.CapacityRegular + ": ";
+                foreach (LootAmount loot in PlayerInventory.Instance.Inventory.inventory)
+                {
+                    debugInventory.text += loot.lootType + ": " + loot.amount + " - ";
+                }
+                //remove the last " - " from the string
+                debugInventory.text = debugInventory.text.Remove(debugInventory.text.Length - 3);
+            }
             if (debugInventory != null)
             {
-                debugInventory.text = "Inventory: Empty";
+                debugInventory.text += "\n" + PlayerInventory.Instance.CoinDisplay;
+                debugInventory.text += "\n" + "Idle Loot: " + IdleLoot.Instance.availableLoot() + "/" + Saving.Instance.Upgrades.GetUpgrade(UpgradeType.MaxIdleLoot).GetCurrentValue();
             }
         }
-        else
+        catch
         {
-            debugInventory.text = "Inventory " + PlayerInventory.Instance.CapacityRegular + ": ";
-            foreach (LootAmount loot in PlayerInventory.Instance.Inventory.inventory)
-            {
-                debugInventory.text += loot.lootType + ": " + loot.amount + " - ";
-            }
-            //remove the last " - " from the string
-            debugInventory.text = debugInventory.text.Remove(debugInventory.text.Length - 3);
-        }
-        if (debugInventory != null)
-        {
-            debugInventory.text += "\n" + PlayerInventory.Instance.CoinDisplay;
-            debugInventory.text += "\n" + "Idle Loot: " + IdleLoot.Instance.availableLoot() + "/" + IdleLoot.Instance.maxIdleLoot;
+            Debug.Log("Not loaded");
         }
     }
 

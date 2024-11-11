@@ -10,9 +10,21 @@ public class Saving : MonoBehaviour
     public static Saving Instance;
     private float nextSaveTime = 60f;
     private SaveData saveData;
-    public Inventory Inventory => saveData.inventory;
-    public Upgrades Upgrades => saveData.upgrades;
-    public DateTime LastCollected => saveData.lastCollected;
+    public Inventory Inventory
+    {
+        get => saveData.inventory;
+        set => saveData.inventory = value;
+    }
+    public Upgrades Upgrades
+    {
+        get => saveData.upgrades;
+        set => saveData.upgrades = value;
+    }
+    public DateTime LastCollected
+    {
+        get => saveData.lastCollected;
+        set => saveData.lastCollected = value;
+    }
 
     //Persistent data path
     private string savePath => $"{Application.persistentDataPath}/inventory.json";
@@ -97,7 +109,7 @@ public class Saving : MonoBehaviour
                 saveData.inventory = new Inventory();
                 saveData.upgrades = new Upgrades();
                 saveData.upgrades.AddUpgrade(UpgradeType.InventorySize, 1, -1, 50, 10, 50);
-                saveData.upgrades.AddUpgrade(UpgradeType.IdleLootValue, 1, -1, 100, 1);
+                saveData.upgrades.AddUpgrade(UpgradeType.IdleLootValue, 1, -1, 100, 1, 1);
                 saveData.upgrades.AddUpgrade(UpgradeType.MaxIdleLoot, 1, -1, 50, 10, 100);
                 saveData.upgrades.AddUpgrade(UpgradeType.SellValue, 1, -1, 1000, 1, 1);
                 saveData.lastCollected = System.DateTime.Now;
