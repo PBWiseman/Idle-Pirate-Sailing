@@ -37,18 +37,16 @@ public class MainUI : MonoBehaviour
         fpsCounter = document.Q<Label>("fps");
         shopButton = document.Q<Button>("ShopButton");
         shopButton.RegisterCallback<ClickEvent>(ShopUI.Instance.OpenShop);
-        StartCoroutine(StartDelay());
+        StartCoroutine(StartPrintInventory());
     }
 
-    private IEnumerator StartDelay()
+    //Call print inventory every .2 seconds until it returns true
+    IEnumerator StartPrintInventory()
     {
-        yield return new WaitForSeconds(.2f);
-        PrintInventory();
-    }
-
-    void Update()
-    {
-        UpdateFps((int)(1f / Time.unscaledDeltaTime));
+        while (!PrintInventory())
+        {
+            yield return new WaitForSeconds(.2f);
+        }
     }
 
     public void updateDisplay(LootType lootType, int amount)
@@ -67,7 +65,7 @@ public class MainUI : MonoBehaviour
         PrintInventory();
     }
 
-    public void PrintInventory()
+    public bool PrintInventory()
     {
         try
         {
@@ -93,15 +91,12 @@ public class MainUI : MonoBehaviour
                 debugInventory.text += "\n" + PlayerInventory.Instance.CoinDisplay;
                 debugInventory.text += "\n" + "Idle Loot: " + IdleLoot.Instance.availableLoot() + "/" + Saving.Instance.Upgrades.GetUpgrade(UpgradeType.MaxIdleLoot).GetCurrentValue();
             }
+            return true;
         }
         catch
         {
             Debug.Log("Not loaded");
+            return false;
         }
-    }
-
-    public void UpdateFps(int fps)
-    {
-        fpsCounter.text = "FPS: " + fps;
     }
 }
