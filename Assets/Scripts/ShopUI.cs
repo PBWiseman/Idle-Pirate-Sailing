@@ -40,6 +40,7 @@ public class ShopUI : MonoBehaviour
 
     private void displayUpgrades()
     {
+        DisplayCoins();
         for (int i = 0; i < upgradeButtons.Count(); i++)
         {
             VisualElement container = upgradeButtons[i];
@@ -61,7 +62,10 @@ public class ShopUI : MonoBehaviour
                 container.Q<Label>("CopperText").text = "0";
             }
             int index = i;
-            container.Q<Button>("Buy").RegisterCallback<ClickEvent>(evt => PurchaseUpgrade(evt, index));
+            Button buyButton = container.Q<Button>("Buy");
+            //Remove the previous event listener as this method can be called multiple times
+            buyButton.UnregisterCallback<ClickEvent>(evt => PurchaseUpgrade(evt, index));
+            buyButton.RegisterCallback<ClickEvent>(evt => PurchaseUpgrade(evt, index));
         }
     }
 
@@ -105,5 +109,13 @@ public class ShopUI : MonoBehaviour
         {
             Debug.Log("Not enough coins");
         }
+    }
+
+    public void DisplayCoins()
+    {
+        VisualElement CoinDisplay = document.rootVisualElement.Q<VisualElement>("CoinDisplay");
+        CoinDisplay.Q<Label>("GoldText").text = PlayerInventory.Instance.ConvertGold(PlayerInventory.Instance.Coins).ToString();
+        CoinDisplay.Q<Label>("SilverText").text = PlayerInventory.Instance.ConvertSilver(PlayerInventory.Instance.Coins).ToString();
+        CoinDisplay.Q<Label>("CopperText").text = PlayerInventory.Instance.ConvertCopper(PlayerInventory.Instance.Coins).ToString();
     }
 }
