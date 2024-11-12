@@ -10,6 +10,7 @@ public class MainUI : MonoBehaviour
 
     private VisualElement document;
     private Button shopButton;
+    private Button helpButton;
     public VisualElement OuterContainer;
     private List<string> AddedLoot = new List<string>();
 
@@ -89,7 +90,9 @@ public class MainUI : MonoBehaviour
         lootDisplays.Add(new LootDisplay(OuterContainer, "SilverCount", LootType.Silver, 0));
         lootDisplays.Add(new LootDisplay(OuterContainer, "GoldCount", LootType.Gold, 0));
         shopButton = document.Q<Button>("ShopButton");
+        helpButton = document.Q<Button>("HelpButton");
         shopButton.RegisterCallback<ClickEvent>(ShopUI.Instance.OpenShop);
+        helpButton.RegisterCallback<ClickEvent>(HelpUI.Instance.OpenHelp);
         StartCoroutine(StartPrintInventory());
     }
 

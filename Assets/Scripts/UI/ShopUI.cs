@@ -78,13 +78,11 @@ public class ShopUI : MonoBehaviour
 
     public void CloseButton(ClickEvent evt)
     {
-        Debug.Log("Closing Shop");
         background.visible = false;
     }
 
     public void OpenShop(ClickEvent evt)
     {
-        Debug.Log("Opening Shop");
         displayUpgrades();
         background.visible = true;
     }
