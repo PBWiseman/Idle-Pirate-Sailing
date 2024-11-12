@@ -167,17 +167,8 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Returns the amount of inventory space used
     /// </summary>
-    private int GetInventorySize => Inventory.inventory.Sum(loot => loot.amount);
+    public int GetInventorySize => Inventory.inventory.Sum(loot => loot.amount);
 
-    /// <summary>
-    /// Returns the amount of inventory space used as a string
-    /// </summary>
-    public string CapacityRegular => GetInventorySize + "/" + maxInventorySize;
-
-    /// <summary>
-    /// Returns a string with the amount of coins the player has
-    /// </summary>
-    public string CoinDisplay => "Gold: " + Coins / 10000 + " - Silver: " + (Coins % 10000) / 100 + " - Copper: " + Coins % 100;
 
     public int ConvertGold(int coins) => coins / 10000;
     public int ConvertSilver(int coins) => (coins % 10000) / 100;

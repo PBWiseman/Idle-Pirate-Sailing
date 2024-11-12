@@ -94,9 +94,8 @@ public class ShopUI : MonoBehaviour
         //Sell items in the player's inventory
         int salePrice = (PlayerInventory.Instance.Inventory.inventory.Sum(loot => loot.amount * (int)loot.lootType)) * Saving.Instance.Upgrades.GetUpgrade(UpgradeType.SellValue).GetCurrentValue();
         PlayerInventory.Instance.ClearInventory();
+        salePrice += IdleLoot.Instance.SellIdleLoot();
         PlayerInventory.Instance.AddLoot(LootType.Copper, salePrice);
-        IdleLoot.Instance.SellIdleLoot();
-        MainUI.Instance.PrintInventory();
         Saving.Instance.Save();
     }
 

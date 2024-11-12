@@ -16,7 +16,9 @@ public enum LootType
     Metal = 20,
     Gold = 10000,
     Silver = 100,
-    Copper = 1
+    Copper = 1,
+    IdleLoot = 0, //Idle loot and inventory are here to make displaying them easier
+    Inventory = -1
 }
 [Serializable]
 public class LootAmount

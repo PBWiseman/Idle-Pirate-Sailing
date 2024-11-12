@@ -5,13 +5,13 @@ using System;
 
 public class IdleLoot : MonoBehaviour
 {
-    DateTime lastCollected
+    public DateTime lastCollected
     {
         get => Saving.Instance.LastCollected;
         set => Saving.Instance.LastCollected = value;
     }
 
-    int maxIdleLoot
+    public int maxIdleLoot
     {
         get
         {
@@ -20,7 +20,7 @@ public class IdleLoot : MonoBehaviour
         }
     }
 
-    int idleLootValue
+    public int idleLootValue
     {
         get
         {
@@ -42,15 +42,15 @@ public class IdleLoot : MonoBehaviour
         }
     }
 
-    public void SellIdleLoot()
+    public int SellIdleLoot()
     {
         int lootAmount = availableLoot();
         if (lootAmount == 0)
         {
-            return;
+            return 0;
         }
-        PlayerInventory.Instance.AddLoot(LootType.Copper, lootAmount * idleLootValue);
         resetIdleLoot();
+        return lootAmount * idleLootValue;
     }
 
     public void resetIdleLoot()

@@ -3,6 +3,38 @@
     <ui:VisualElement name="Shop" style="flex-grow: 0; align-self: flex-end; bottom: auto; position: absolute; width: 20%; height: 10%; left: auto; right: 0; margin-right: 50px; margin-bottom: 0; top: 0; margin-top: 50px;">
         <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShopButton" style="background-image: url(&quot;project://database/Assets/Sprites/GUI/assets7.png?fileID=2097989117&amp;guid=175161cc56c702d41ba2bd2d5834318e&amp;type=3#assets7_18&quot;); -unity-background-scale-mode: scale-to-fit; background-color: rgba(188, 188, 188, 0); height: 100%; width: 100%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
     </ui:VisualElement>
-    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Debug_Added" style="width: 75%; font-size: 65px;" />
-    <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Debug_Inv" style="white-space: normal; font-size: 65px; width: 75%;" />
+    <ui:VisualElement name="OuterContainer" style="flex-grow: 0; width: 40%; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Fonts/TradeWinds-Regular.ttf?fileID=12800000&amp;guid=5797b78fe03db7d41997c9e2db94abc4&amp;type=3#TradeWinds-Regular&quot;); margin-left: 30px; margin-top: 150px; font-size: 70px; -unity-text-align: middle-center; justify-content: space-between;">
+        <ui:VisualElement name="IdleContainer" style="flex-grow: 1; width: 100%; flex-direction: row; height: 89px; justify-content: center;">
+            <ui:VisualElement name="IdleIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets5.png?fileID=731765517&amp;guid=c5e0965bb249ab2488d4e772af463ae9&amp;type=3#assets5_7&quot;); width: 25%; -unity-background-scale-mode: scale-to-fit; margin-right: 30px;" />
+            <ui:Label tabindex="-1" text="999/999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="IdleCount" />
+        </ui:VisualElement>
+        <ui:VisualElement name="InventoryContainer" style="flex-grow: 1; width: 100%; flex-direction: row; height: 89px; justify-content: center;">
+            <ui:VisualElement name="InventoryIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets8.png?fileID=1913982893&amp;guid=2fc7a03484d27374294d49ef17c7916e&amp;type=3#assets8_6&quot;); width: 25%; -unity-background-scale-mode: scale-to-fit; margin-right: 30px;" />
+            <ui:Label tabindex="-1" text="999/999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="InventoryCount" />
+        </ui:VisualElement>
+        <ui:VisualElement name="FabricContainer" style="flex-grow: 1; width: 100%; flex-direction: row; height: 89px; justify-content: center; align-items: stretch; align-self: auto;">
+            <ui:VisualElement name="FabricIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/Debris/sailSmall%20(8).png?fileID=21300000&amp;guid=4d9b568ad2ea47a4fb7d3acb92abbe6b&amp;type=3#sailSmall (8)&quot;); width: 25%; -unity-background-scale-mode: scale-to-fit; margin-right: 30px;" />
+            <ui:Label tabindex="-1" text="999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="FabricCount" />
+        </ui:VisualElement>
+        <ui:VisualElement name="WoodContainer" style="flex-grow: 1; width: 100%; flex-direction: row; height: 89px; justify-content: center;">
+            <ui:VisualElement name="WoodIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/Debris/wood%20(4).png?fileID=21300000&amp;guid=4a4a07f6a2f3f6a4d825e71a8efc4ba7&amp;type=3#wood (4)&quot;); width: 25%; -unity-background-scale-mode: scale-to-fit; margin-right: 30px;" />
+            <ui:Label tabindex="-1" text="999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WoodCount" />
+        </ui:VisualElement>
+        <ui:VisualElement name="MetalContainer" style="flex-grow: 1; width: 100%; flex-direction: row; height: 89px; justify-content: center;">
+            <ui:VisualElement name="MetalIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/Debris/cannonLoose.png?fileID=21300000&amp;guid=3beb02f7b6ed13645a36684dbf7f3c57&amp;type=3#cannonLoose&quot;); width: 25%; -unity-background-scale-mode: scale-to-fit; margin-right: 30px;" />
+            <ui:Label tabindex="-1" text="999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MetalCount" />
+        </ui:VisualElement>
+        <ui:VisualElement name="CopperContainer" style="flex-grow: 1; width: 100%; flex-direction: row; height: 89px; justify-content: center;">
+            <ui:VisualElement name="CopperIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets5.png?fileID=-2058965697&amp;guid=c5e0965bb249ab2488d4e772af463ae9&amp;type=3#assets5_2&quot;); width: 25%; -unity-background-scale-mode: scale-to-fit; margin-right: 30px;" />
+            <ui:Label tabindex="-1" text="999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CopperCount" />
+        </ui:VisualElement>
+        <ui:VisualElement name="SilverContainer" style="flex-grow: 1; width: 100%; flex-direction: row; height: 89px; justify-content: center;">
+            <ui:VisualElement name="SilverIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets5.png?fileID=-1048698702&amp;guid=c5e0965bb249ab2488d4e772af463ae9&amp;type=3#assets5_1&quot;); width: 25%; -unity-background-scale-mode: scale-to-fit; margin-right: 30px;" />
+            <ui:Label tabindex="-1" text="999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SilverCount" />
+        </ui:VisualElement>
+        <ui:VisualElement name="GoldContainer" style="flex-grow: 1; width: 100%; flex-direction: row; height: 89px; justify-content: center;">
+            <ui:VisualElement name="GoldIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/GUI/assets5.png?fileID=1954563645&amp;guid=c5e0965bb249ab2488d4e772af463ae9&amp;type=3#assets5_0&quot;); width: 25%; -unity-background-scale-mode: scale-to-fit; margin-right: 30px;" />
+            <ui:Label tabindex="-1" text="999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GoldCount" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
