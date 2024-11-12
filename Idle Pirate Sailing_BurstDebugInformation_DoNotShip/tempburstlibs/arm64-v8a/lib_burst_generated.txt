@@ -1,7 +1,7 @@
-Library: D:\Palin\Idle-Pirate-Sailing\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_generated
+Library: D:\Palin\Idle-Pirate-Sailing\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --platform=Android
 --backend=burst-llvm-16
---target=ARMV7A_NEON32
+--target=ARMV8A_AARCH64
 --global-safety-checks-setting=Off
 --meta-data-generation=False
 --dump=Function
@@ -11,7 +11,7 @@ Library: D:\Palin\Idle-Pirate-Sailing\Temp\BurstOutput\tempburstlibs\armeabi-v7a
 --temp-folder=D:\Palin\Idle-Pirate-Sailing\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/2022.3.41f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\Palin\Idle-Pirate-Sailing\Library\Burst
---output=D:\Palin\Idle-Pirate-Sailing\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_generated
+--output=D:\Palin\Idle-Pirate-Sailing\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
