@@ -22,8 +22,22 @@ public class Saving : MonoBehaviour
     }
     public DateTime LastCollected
     {
-        get => saveData.lastCollected;
-        set => saveData.lastCollected = value;
+        get
+        {
+            try
+            {
+                return System.DateTime.Parse(saveData.lastCollected);
+            }
+            catch (System.Exception)
+            {
+                Debug.LogWarning("Failed to parse last collected date, returning current date - " + saveData.lastCollected);
+                return System.DateTime.Now;
+            }
+        }
+        set
+        {
+            saveData.lastCollected = value.ToString();
+        }
     }
 
     //Persistent data path
@@ -107,12 +121,8 @@ public class Saving : MonoBehaviour
                 //Create a new save file
                 saveData = new SaveData();
                 saveData.inventory = new Inventory();
-                saveData.upgrades = new Upgrades();
-                saveData.upgrades.AddUpgrade(UpgradeType.InventorySize, 1, -1, 50, 10, 50);
-                saveData.upgrades.AddUpgrade(UpgradeType.IdleLootValue, 1, -1, 100, 1, 1);
-                saveData.upgrades.AddUpgrade(UpgradeType.MaxIdleLoot, 1, -1, 50, 10, 100);
-                saveData.upgrades.AddUpgrade(UpgradeType.SellValue, 1, -1, 1000, 1, 1);
-                saveData.lastCollected = System.DateTime.Now;
+                saveData.upgrades = defaultUpgrades();                
+                saveData.lastCollected = System.DateTime.Now.ToString();
                 json = JsonUtility.ToJson(saveData, true);
                 File.WriteAllText(savePath, json);
             }
@@ -120,6 +130,18 @@ public class Saving : MonoBehaviour
             {
                 json = File.ReadAllText(savePath);
                 saveData = JsonUtility.FromJson<SaveData>(json);
+                if (saveData.upgrades == null)
+                {
+                    saveData.upgrades = defaultUpgrades();
+                }
+                if (saveData.lastCollected == null)
+                {
+                    saveData.lastCollected = System.DateTime.Now.ToString();
+                }
+                if (saveData.inventory == null)
+                {
+                    saveData.inventory = new Inventory();
+                }
             }
         }
         catch (System.Exception e)
@@ -127,5 +149,15 @@ public class Saving : MonoBehaviour
             Debug.LogError($"Failed to load file: {e}");
             saveData = new SaveData();
         }
+    }
+
+    private Upgrades defaultUpgrades()
+    {
+        Upgrades upgrades = new Upgrades();
+        upgrades.AddUpgrade(UpgradeType.InventorySize, 1, -1, 50, 10, 50);
+        upgrades.AddUpgrade(UpgradeType.IdleLootValue, 1, -1, 100, 1, 1);
+        upgrades.AddUpgrade(UpgradeType.MaxIdleLoot, 1, -1, 50, 10, 100);
+        upgrades.AddUpgrade(UpgradeType.SellValue, 1, -1, 1000, 1, 1);
+        return upgrades;
     }
 }

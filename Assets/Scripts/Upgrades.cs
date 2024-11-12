@@ -91,5 +91,5 @@ public class SaveData
 {
     public Inventory inventory;
     public Upgrades upgrades;
-    public DateTime lastCollected;
+    public string lastCollected;
 }

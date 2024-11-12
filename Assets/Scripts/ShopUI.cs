@@ -46,7 +46,14 @@ public class ShopUI : MonoBehaviour
             VisualElement container = upgradeButtons[i];
             Upgrade upgrade = Saving.Instance.Upgrades.upgrades[i];
             container.Q<Label>("UpgradeName").text = upgrade.upgradeName;
-            container.Q<Label>("Current").text = upgrade.GetCurrentValue().ToString();
+            if(upgrade.upgradeName == "Sell Value")
+            {
+                container.Q<Label>("Current").text = upgrade.GetCurrentValue().ToString() + "x";
+            }
+            else
+            {
+                container.Q<Label>("Current").text = upgrade.GetCurrentValue().ToString();
+            }
             if (upgrade.CanUpgrade())
             {
                 container.Q<Label>("Added").text = "+" + upgrade.upgradeValue.ToString();
