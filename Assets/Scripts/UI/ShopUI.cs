@@ -46,7 +46,7 @@ public class ShopUI : MonoBehaviour
             VisualElement container = upgradeButtons[i];
             Upgrade upgrade = Saving.Instance.Upgrades.upgrades[i];
             container.Q<Label>("UpgradeName").text = upgrade.upgradeName;
-            if(upgrade.upgradeName == "Sell Value")
+            if(upgrade.upgradeName == "Sell Value" || upgrade.upgradeName == "Idle Loot Value")
             {
                 container.Q<Label>("Current").text = upgrade.GetCurrentValue().ToString() + "x";
             }
@@ -73,6 +73,17 @@ public class ShopUI : MonoBehaviour
             //Remove the previous event listener as this method can be called multiple times
             buyButton.UnregisterCallback<ClickEvent>(evt => PurchaseUpgrade(evt, index));
             buyButton.RegisterCallback<ClickEvent>(evt => PurchaseUpgrade(evt, index));
+            //If the upgrade is maxed out or the player cant afford it, disable the buy button
+            if (upgrade.CanUpgrade() && PlayerInventory.Instance.Coins >= upgrade.GetUpgradeCost())
+            {
+                //Set button to normal colour
+                buyButton.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 1);
+            }
+            else
+            {
+                //Grey out the button
+                buyButton.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 0.3f);
+            }
         }
     }
 
@@ -103,7 +114,7 @@ public class ShopUI : MonoBehaviour
         Debug.Log(upgradeIndex);
         Upgrade upgrade = Saving.Instance.Upgrades.upgrades[upgradeIndex];
         price = upgrade.GetUpgradeCost();
-        if (PlayerInventory.Instance.PayWithCoins(price))
+        if (PlayerInventory.Instance.PayWithCoins(price) && upgrade.CanUpgrade())
         {
             upgrade.UpgradeLevel();
             Saving.Instance.Save();

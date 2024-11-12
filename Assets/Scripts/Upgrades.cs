@@ -7,9 +7,9 @@ using System;
 public enum UpgradeType
 {
     InventorySize,
-    IdleLootValue,
+    SellValue,
     MaxIdleLoot,
-    SellValue
+    IdleLootValue
 }
 
 public class UpgradeDictionary

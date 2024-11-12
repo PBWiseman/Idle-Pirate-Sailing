@@ -155,9 +155,9 @@ public class Saving : MonoBehaviour
     {
         Upgrades upgrades = new Upgrades();
         upgrades.AddUpgrade(UpgradeType.InventorySize, 1, -1, 50, 10, 50);
-        upgrades.AddUpgrade(UpgradeType.IdleLootValue, 1, -1, 100, 1, 1);
-        upgrades.AddUpgrade(UpgradeType.MaxIdleLoot, 1, -1, 50, 10, 100);
         upgrades.AddUpgrade(UpgradeType.SellValue, 1, -1, 1000, 1, 1);
+        upgrades.AddUpgrade(UpgradeType.MaxIdleLoot, 1, -1, 50, 10, 100);
+        upgrades.AddUpgrade(UpgradeType.IdleLootValue, 1, -1, 100, 1, 1);
         return upgrades;
     }
 }
