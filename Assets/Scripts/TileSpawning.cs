@@ -81,14 +81,14 @@ public class TileSpawning : MonoBehaviour
     private void Update()
     {
         //Move the grid down 2 unit per second
-        grid.transform.position -= new Vector3(0, 2 * Time.deltaTime, 0);
+        //grid.transform.position -= new Vector3(0, 2 * Time.deltaTime, 0);
         //Every x amount of time start to make a port
-        if (Time.time > nextPortTimer)
-        {
+        //if (Time.time > nextPortTimer)
+        //{
             //Spawn port
-            portSpawning = true;
-            nextPortTimer = Time.time + Random.Range(30, 60);
-        }
+            //portSpawning = true;
+            //nextPortTimer = Time.time + Random.Range(30, 60);
+        //}
         spawnTopRow(coastLines);
         despawnBottomRow();
     }
