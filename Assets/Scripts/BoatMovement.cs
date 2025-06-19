@@ -27,59 +27,59 @@ public class BoatMovement : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        //Check for touch input
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId) || touch.phase == TouchPhase.Ended)
-            {
-                return;
-            }
-            //Convert the boat's world position to screen position
-            Vector3 boatScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        // //Check for touch input
+        // if (Input.touchCount > 0)
+        // {
+        //     Touch touch = Input.GetTouch(0);
+        //     if (EventSystem.current.IsPointerOverGameObject(touch.fingerId) || touch.phase == TouchPhase.Ended)
+        //     {
+        //         return;
+        //     }
+        //     //Convert the boat's world position to screen position
+        //     Vector3 boatScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
 
-            //Check if the touch is on the right or left side of the boat
-            if (touch.position.x > boatScreenPosition.x + 50 && canMoveRight)
-            {
-                //Move the boat to the right
-                transform.Translate(Vector3.right * speed * Time.deltaTime);
-                //If the rotation is not set to 0 set the rotation to 0
-                if (boat.transform.rotation.eulerAngles.z > 1 && boat.transform.rotation.eulerAngles.z < 180)
-                {
-                    boat.transform.rotation = Quaternion.identity;
-                }
-                //While the boat is moving to the right, rotate it to the right
-                RotateBoat(-30f);
-            }
-            else if (touch.position.x < boatScreenPosition.x - 50 && canMoveLeft)
-            {
-                //Move the boat to the left
-                transform.Translate(Vector3.left * speed * Time.deltaTime);
-                //If the rotation is not set to 0, rotate the boat back to its original position very swiftly
-                if (boat.transform.rotation.eulerAngles.z < 359 && boat.transform.rotation.eulerAngles.z > 180)
-                {
-                    boat.transform.rotation = Quaternion.identity;
-                }
-                //While the boat is moving to the left, rotate it to the left
-                RotateBoat(30f);
-            }
-            else
-            {
-                boat.transform.rotation = Quaternion.Slerp(boat.transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
-            }
+        //     //Check if the touch is on the right or left side of the boat
+        //     if (touch.position.x > boatScreenPosition.x + 50 && canMoveRight)
+        //     {
+        //         //Move the boat to the right
+        //         transform.Translate(Vector3.right * speed * Time.deltaTime);
+        //         //If the rotation is not set to 0 set the rotation to 0
+        //         if (boat.transform.rotation.eulerAngles.z > 1 && boat.transform.rotation.eulerAngles.z < 180)
+        //         {
+        //             boat.transform.rotation = Quaternion.identity;
+        //         }
+        //         //While the boat is moving to the right, rotate it to the right
+        //         RotateBoat(-30f);
+        //     }
+        //     else if (touch.position.x < boatScreenPosition.x - 50 && canMoveLeft)
+        //     {
+        //         //Move the boat to the left
+        //         transform.Translate(Vector3.left * speed * Time.deltaTime);
+        //         //If the rotation is not set to 0, rotate the boat back to its original position very swiftly
+        //         if (boat.transform.rotation.eulerAngles.z < 359 && boat.transform.rotation.eulerAngles.z > 180)
+        //         {
+        //             boat.transform.rotation = Quaternion.identity;
+        //         }
+        //         //While the boat is moving to the left, rotate it to the left
+        //         RotateBoat(30f);
+        //     }
+        //     else
+        //     {
+        //         boat.transform.rotation = Quaternion.Slerp(boat.transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
+        //     }
 
-        }
-        else
-        {
-            //If there is no touch input, rotate the boat back to its original position
-            boat.transform.rotation = Quaternion.Slerp(boat.transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
-        }
+        // }
+        // else
+        // {
+        //     //If there is no touch input, rotate the boat back to its original position
+        //     boat.transform.rotation = Quaternion.Slerp(boat.transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
+        // }
 
-        //If the boats X position is in the tile columns covered by the TileSpawning.Instance.coastLines array debug it
-        if (transform.position.x < TileSpawning.Instance.coastLines[0].x && transform.position.x > TileSpawning.Instance.coastLines[TileSpawning.Instance.coastLines.Count - 1].x)
-        {
-            ShopUI.Instance.SellItems();
-        }
+        // //If the boats X position is in the tile columns covered by the TileSpawning.Instance.coastLines array debug it
+        // if (transform.position.x < TileSpawning.Instance.coastLines[0].x && transform.position.x > TileSpawning.Instance.coastLines[TileSpawning.Instance.coastLines.Count - 1].x)
+        // {
+        //     ShopUI.Instance.SellItems();
+        // }
     }
     private void RotateBoat(float rotationSpeed)
     {
