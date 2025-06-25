@@ -6,7 +6,11 @@ using UnityEngine.EventSystems;
 
 public class BoatMovement : MonoBehaviour
 {
-    private float speed = 5.0f;
+    private float TackSpeed = 5.0f;
+    private float SailSpeed = 0;
+    private float Acceleration = 3f;
+    private float MaxSpeed = 20f;
+    private float Deceleration = 1f;
     public GameObject boat;
     private bool canMoveRight = true;   
     private bool canMoveLeft = true;
@@ -50,7 +54,7 @@ public class BoatMovement : MonoBehaviour
         if (direction != Vector3.zero)
         {
             //Move the boat in the direction of the joystick
-            transform.Translate(direction * speed * Time.deltaTime, Space.World);
+            transform.Translate(direction * TackSpeed * Time.deltaTime, Space.World);
             //If the rotation is not set to 0 set the rotation to 0
             if (boat.transform.rotation.eulerAngles.z > 1 && boat.transform.rotation.eulerAngles.z < 180)
             {
@@ -64,48 +68,25 @@ public class BoatMovement : MonoBehaviour
             //If there is no joystick input, rotate the boat back to its original position
             boat.transform.rotation = Quaternion.Slerp(boat.transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
         }
+        //Increase or decrease the sail speed based on the joystick's vertical input. Minimum speed is 0, maximum speed is 10. Pushing it forward should increase the speed. The further the joystick is pushed, the faster the acceleration. Releasing the joystick should gently decrease the speed to 0. Pulling it back should slow the boat down
+        if (floatingJoystick.Vertical > 0)
+        {
+            SailSpeed = Mathf.Min(SailSpeed + Acceleration * Time.deltaTime, MaxSpeed);
+        }
+        else if (floatingJoystick.Vertical < 0)
+        {
+            SailSpeed = Mathf.Max(SailSpeed - Deceleration * Time.deltaTime, 0f);
+        }
+        else
+        {
+            SailSpeed = Mathf.Lerp(SailSpeed, 0f, Acceleration * Time.deltaTime);
+        }
 
-        //Check for touch input
-        // //Convert the boat's world position to screen position
-        // Vector3 boatScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
-
-        // //Check if the touch is on the right or left side of the boat
-        // if (touch.position.x > boatScreenPosition.x + 50 && canMoveRight)
-        // {
-        //     //Move the boat to the right
-        //     transform.Translate(Vector3.right * speed * Time.deltaTime);
-        //     //If the rotation is not set to 0 set the rotation to 0
-        //     if (boat.transform.rotation.eulerAngles.z > 1 && boat.transform.rotation.eulerAngles.z < 180)
-        //     {
-        //         boat.transform.rotation = Quaternion.identity;
-        //     }
-        //     //While the boat is moving to the right, rotate it to the right
-        //     RotateBoat(-30f);
-        // }
-        // else if (touch.position.x < boatScreenPosition.x - 50 && canMoveLeft)
-        // {
-        //     //Move the boat to the left
-        //     transform.Translate(Vector3.left * speed * Time.deltaTime);
-        //     //If the rotation is not set to 0, rotate the boat back to its original position very swiftly
-        //     if (boat.transform.rotation.eulerAngles.z < 359 && boat.transform.rotation.eulerAngles.z > 180)
-        //     {
-        //         boat.transform.rotation = Quaternion.identity;
-        //     }
-        //     //While the boat is moving to the left, rotate it to the left
-        //     RotateBoat(30f);
-        // }
-        // else
-        // {
-        //     boat.transform.rotation = Quaternion.Slerp(boat.transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
-        // }
-        // //If there is no touch input, rotate the boat back to its original position
-        // boat.transform.rotation = Quaternion.Slerp(boat.transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
-
-        // //If the boats X position is in the tile columns covered by the TileSpawning.Instance.coastLines array debug it
-        // if (transform.position.x < TileSpawning.Instance.coastLines[0].x && transform.position.x > TileSpawning.Instance.coastLines[TileSpawning.Instance.coastLines.Count - 1].x)
-        // {
-        //     ShopUI.Instance.SellItems();
-        // }
+        //Move the boat forward based on the sail speed
+        if (SailSpeed > 0)
+        {
+            transform.Translate(Vector3.up * SailSpeed * Time.deltaTime, Space.World);
+        }
     }
 
     private void RotateBoat(float rotationSpeed)
@@ -143,10 +124,10 @@ public class BoatMovement : MonoBehaviour
             canMoveRight = true;
             canMoveLeft = true;
         }
-        //If the boats Y position isn't -8 then set it to -8
-        if (transform.position.y != -8)
-        {
-            transform.position = new Vector3(transform.position.x, -8, transform.position.z);
-        }
+        // //If the boats Y position isn't -8 then set it to -8
+        // if (transform.position.y != -8)
+        // {
+        //     transform.position = new Vector3(transform.position.x, -8, transform.position.z);
+        // }
     }
 }
