@@ -10,7 +10,7 @@ public class BoatMovement : MonoBehaviour
     private float SailSpeed = 0;
     private float Acceleration = 3f;
     private float MaxSpeed = 20f;
-    private float Deceleration = 1f;
+    private float Deceleration = 2f;
     public GameObject boat;
     private bool canMoveRight = true;   
     private bool canMoveLeft = true;
@@ -75,11 +75,11 @@ public class BoatMovement : MonoBehaviour
         }
         else if (floatingJoystick.Vertical < 0)
         {
-            SailSpeed = Mathf.Max(SailSpeed - Deceleration * Time.deltaTime, 0f);
+            SailSpeed = Mathf.Max(SailSpeed - 2.5f * Time.deltaTime, 0f);
         }
         else
         {
-            SailSpeed = Mathf.Lerp(SailSpeed, 0f, Acceleration * Time.deltaTime);
+            SailSpeed = Mathf.Lerp(SailSpeed, 0f, 1.5f * Time.deltaTime);
         }
 
         //Move the boat forward based on the sail speed
