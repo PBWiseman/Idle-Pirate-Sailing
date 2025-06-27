@@ -29,16 +29,6 @@ public class BoatMovement : MonoBehaviour
             Debug.LogError("Boat GameObject is not assigned in the BoatMovement script.");
             return;
         }
-        //Set the boat's position to a bit above the bottom of the camera
-        Camera mainCamera = Camera.main;
-        if (mainCamera == null)
-        {
-            Debug.LogError("Main camera not found. Please ensure there is a camera tagged as 'MainCamera' in the scene.");
-            return;
-        }
-        Vector3 worldPosition = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.1f, mainCamera.nearClipPlane));
-        //Set the boat's position
-        transform.position = new Vector3(transform.position.x, worldPosition.y, transform.position.z);
     }
 
     //Update is called once per frame
@@ -77,9 +67,14 @@ public class BoatMovement : MonoBehaviour
         {
             SailSpeed = Mathf.Max(SailSpeed - 2.5f * Time.deltaTime, 0f);
         }
-        else
+        else if (SailSpeed > 0)
         {
-            SailSpeed = Mathf.Lerp(SailSpeed, 0f, 1.5f * Time.deltaTime);
+            //If the joystick is not being used, gently decrease the sail speed to 0
+            SailSpeed = Mathf.Lerp(SailSpeed, 0f, Deceleration * Time.deltaTime);
+            if (SailSpeed < 0.1f)
+            {
+                SailSpeed = 0f;
+            }
         }
 
         //Move the boat forward based on the sail speed
@@ -87,6 +82,10 @@ public class BoatMovement : MonoBehaviour
         {
             transform.Translate(Vector3.up * SailSpeed * Time.deltaTime, Space.World);
         }
+        //clamp the z axis of the boat as this is a 2D game
+        Vector3 boatPosition = transform.position;
+        boatPosition.z = 0f; // Ensure the z position is always 0
+        transform.position = boatPosition;
     }
 
     private void RotateBoat(float rotationSpeed)
