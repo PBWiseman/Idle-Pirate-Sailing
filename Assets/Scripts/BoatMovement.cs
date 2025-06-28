@@ -1,21 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using UnityEngine.EventSystems;
 
 public class BoatMovement : MonoBehaviour
 {
-    private float TackSpeed = 5.0f;
+    //Boat movement variables
+
+    //Tack speed is a multiplier for the rotation speed of the boat when turning
+    //1f is normal speed, 2f is double speed, 0.5f is half speed, etc.
+    private float TackSpeed = 1f;
+    //Sail speed is the speed at which the boat is currently moving forward
+    //It is increased by the joystick's vertical input and decreased by the joystick's horizontal input
     private float SailSpeed = 0;
+    //Acceleration is the rate at which the boat accelerates when the joystick is pushed forward
     private float Acceleration = 3f;
+    //Max speed is the maximum speed the boat can reach
     private float MaxSpeed = 20f;
-    private float Deceleration = 2f;
-    public GameObject boat;
-    private bool canMoveRight = true;   
-    private bool canMoveLeft = true;
+    //Passive deceleration is the rate at which the boat slows down when the joystick is not being used
+    private float PassiveDeceleration = 2f;
+    //Active deceleration is the rate at which the boat slows down when the joystick is pulled back
+    private float ActiveDeceleration = 2.5f;
+
+    //References to the boat GameObject and the FloatingJoystick component
+    [Header("Boat Assignments")]
+    //The boat GameObject that this script will control
+    [SerializeField]
+    private GameObject boat;
+    //The FloatingJoystick component that will be used to control the boat's movement
     [SerializeField]
     private FloatingJoystick floatingJoystick;
+
     //Start is called before the first frame update
     void Start()
     {
@@ -34,53 +46,25 @@ public class BoatMovement : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        Vector3 direction = Vector3.forward * floatingJoystick.Vertical + Vector3.right * floatingJoystick.Horizontal;
-        //If the joystick is not being used, set the direction to 0
-        if (direction.magnitude < 0.1f)
+        //Take the horizontal input from the joystick and rotate the boat based on that input
+        float horizontalInput = floatingJoystick.Horizontal;
+        //if the horizontal input is not 0, rotate the boat based on that input
+        if (Mathf.Abs(horizontalInput) > 0.1f)
         {
-            direction = Vector3.zero;
-        }
-        //If the joystick is being used, move the boat in the direction of the joystick
-        if (direction != Vector3.zero)
-        {
-            //Move the boat in the direction of the joystick
-            transform.Translate(direction * TackSpeed * Time.deltaTime, Space.World);
-            //If the rotation is not set to 0 set the rotation to 0
-            if (boat.transform.rotation.eulerAngles.z > 1 && boat.transform.rotation.eulerAngles.z < 180)
-            {
-                boat.transform.rotation = Quaternion.identity;
-            }
-            //While the boat is moving, rotate it based on joystick input
-            RotateBoat(floatingJoystick.Horizontal * -30f);
-        }
-        else
-        {
-            //If there is no joystick input, rotate the boat back to its original position
-            boat.transform.rotation = Quaternion.Slerp(boat.transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
-        }
-        //Increase or decrease the sail speed based on the joystick's vertical input. Minimum speed is 0, maximum speed is 10. Pushing it forward should increase the speed. The further the joystick is pushed, the faster the acceleration. Releasing the joystick should gently decrease the speed to 0. Pulling it back should slow the boat down
-        if (floatingJoystick.Vertical > 0)
-        {
-            SailSpeed = Mathf.Min(SailSpeed + Acceleration * Time.deltaTime, MaxSpeed);
-        }
-        else if (floatingJoystick.Vertical < 0)
-        {
-            SailSpeed = Mathf.Max(SailSpeed - 2.5f * Time.deltaTime, 0f);
-        }
-        else if (SailSpeed > 0)
-        {
-            //If the joystick is not being used, gently decrease the sail speed to 0
-            SailSpeed = Mathf.Lerp(SailSpeed, 0f, Deceleration * Time.deltaTime);
-            if (SailSpeed < 0.1f)
-            {
-                SailSpeed = 0f;
-            }
+            RotateBoat(horizontalInput * -30f);
         }
 
-        //Move the boat forward based on the sail speed
+        //Take the vertical input from the joystick and move the boat forward based on that input
+        float verticalInput = floatingJoystick.Vertical;
+        VerticalMovement(verticalInput);
+
+        //Move the boat forward based on the sail speed and current ship rotation
         if (SailSpeed > 0)
         {
-            transform.Translate(Vector3.up * SailSpeed * Time.deltaTime, Space.World);
+            // Move the boat forward in the direction it is facing
+            Vector3 forwardMovement = boat.transform.up * SailSpeed * Time.deltaTime;
+            transform.Translate(forwardMovement, Space.World);
+            // transform.Translate(Vector3.up * SailSpeed * Time.deltaTime, Space.World);
         }
         //clamp the z axis of the boat as this is a 2D game
         Vector3 boatPosition = transform.position;
@@ -90,10 +74,34 @@ public class BoatMovement : MonoBehaviour
 
     private void RotateBoat(float rotationSpeed)
     {
+        //Modify the rotation speed based on the tack speed
+        rotationSpeed *= TackSpeed;
         float currentZAngle = boat.transform.rotation.eulerAngles.z;
         if (currentZAngle > 180) currentZAngle -= 360; // Convert to range -180 to 180
+        boat.transform.rotation = Quaternion.Euler(0, 0, currentZAngle + rotationSpeed * Time.deltaTime);
+    }
 
-        float newZAngle = Mathf.Clamp(currentZAngle + rotationSpeed * Time.deltaTime, -30f, 30f);
-        boat.transform.rotation = Quaternion.Euler(0, 0, newZAngle);
+    private void VerticalMovement(float verticalInput)
+    {
+        //Increase or decrease the sail speed based on the joystick's vertical input.
+        //Pushing it forward increases the speed. The further the joystick is pushed, the faster the acceleration. Releasing the joystick will gently decrease the speed to 0. Pulling it back will slow the boat down
+        if (verticalInput > 0)
+        {
+            SailSpeed = Mathf.Min(SailSpeed + Acceleration * Time.deltaTime, MaxSpeed);
+        }
+        else if (verticalInput < 0)
+        {
+            SailSpeed = Mathf.Max(SailSpeed - ActiveDeceleration * Time.deltaTime, 0f);
+        }
+        else if (SailSpeed > 0)
+        {
+            //If the joystick is not being used, gently decrease the sail speed to 0
+            SailSpeed = Mathf.Lerp(SailSpeed, 0f, PassiveDeceleration * Time.deltaTime);
+            //If the speed is very low, set it to 0 to avoid floating point errors
+            if (SailSpeed < 0.1f)
+            {
+                SailSpeed = 0f;
+            }
+        }
     }
 }
