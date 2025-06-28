@@ -96,37 +96,4 @@ public class BoatMovement : MonoBehaviour
         float newZAngle = Mathf.Clamp(currentZAngle + rotationSpeed * Time.deltaTime, -30f, 30f);
         boat.transform.rotation = Quaternion.Euler(0, 0, newZAngle);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<Tilemap>() != null)
-        {
-            Vector2 collisionNormal = collision.contacts[0].normal;
-
-            if (collisionNormal.x > 0)
-            {
-                //Collision from the left, disable right movement
-                canMoveLeft = false;
-            }
-            else if (collisionNormal.x < 0)
-            {
-                //Collision from the right, disable left movement
-                canMoveRight = false;
-            }
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<Tilemap>() != null)
-        {
-            canMoveRight = true;
-            canMoveLeft = true;
-        }
-        // //If the boats Y position isn't -8 then set it to -8
-        // if (transform.position.y != -8)
-        // {
-        //     transform.position = new Vector3(transform.position.x, -8, transform.position.z);
-        // }
-    }
 }
