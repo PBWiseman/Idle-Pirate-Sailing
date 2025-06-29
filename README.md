@@ -1,6 +1,6 @@
 <h1 align="center"> Idle Pirate Sailing </h1>
 
-Idle Pirate Sailing is a simple 2d mobile idle game. This game was made for a third year Bachelor of IT Mobile Game Development paper at Otago Polytechnic. It is intended to be a minimum viable product and was my second time making a mobile game and my first time making an endless runner. I intend to slowly continue development on this in my free time. If you have any interest in developing additional content for the game, please get in touch!
+Idle Pirate Sailing is a simple 2d mobile idle game. This game was originally made for a third year Bachelor of IT Mobile Game Development paper at Otago Polytechnic. It was intended to be a minimum viable product and was my second time making a mobile game and my first time making this style of mobile game. I decided to continue work on this after my course finished and am in the process of slowly chipping away at it. I have decided to redesign the game and turn it from an endless runner to a game with free movement focussed on collecting resources and combining and upgrading parts of your ship.
 
 ## How to play
 
