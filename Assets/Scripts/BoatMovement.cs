@@ -15,7 +15,7 @@ public class BoatMovement : MonoBehaviour
     //Max speed is the maximum speed the boat can reach
     private float MaxSpeed = 20f;
     //Passive deceleration is the rate at which the boat slows down when the joystick is not being used
-    private float PassiveDeceleration = 2f;
+    private float PassiveDeceleration = .5f;
     //Active deceleration is the rate at which the boat slows down when the joystick is pulled back
     private float ActiveDeceleration = 2.5f;
 
